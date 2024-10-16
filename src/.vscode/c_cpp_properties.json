@@ -1,0 +1,35 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/install/rune_solver/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/install/rune_detector/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/install/rm_serial_driver/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/install/rm_camera_driver/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/install/armor_solver/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/install/armor_detector/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/install/rm_utils/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/install/rm_interfaces/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/src/rm_auto_aim/armor_detector/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/src/rm_auto_aim/armor_solver/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/src/rm_hardware_driver/rm_camera_driver/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/src/rm_hardware_driver/rm_serial_driver/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/src/rm_rune/rune_detector/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/src/rm_rune/rune_solver/include/**",
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/src/rm_utils/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

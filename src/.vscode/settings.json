@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "filesystem": "cpp",
+        "*.ipp": "cpp",
+        "random": "cpp",
+        "limits": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "variant": "cpp"
+    },
+    "python.autoComplete.extraPaths": [
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/install/rm_interfaces/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/onecraftzrx/codes/validate/FYT2024_vision-main/install/rm_interfaces/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

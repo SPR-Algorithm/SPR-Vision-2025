@@ -1,0 +1,6 @@
+/mv_camera:
+  ros__parameters:
+    camera_name: mv_camera
+
+    exposure_time: 2500
+    analog_gain: 64
