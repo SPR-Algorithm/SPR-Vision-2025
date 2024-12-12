@@ -41,9 +41,10 @@ class FixedPacket {
   // 清除缓存, date_bytes和check_byte都用0填充
   void clear() { memset(buffer_ + 1, 0, capacity - 2); }
   // 设置flag
-  void setCheckByte(uint8_t check_byte) {
-    buffer_[capacity - 2] = check_byte;
-  }
+  // 由于check_byte在代码中没有后续实现，所以暂时留空作为传递enemy_id使用看一下，如遇报错恢复此处。
+  // void setCheckByte(uint8_t check_byte) {
+  //   buffer_[capacity - 2] = check_byte;
+  // }
   // copy数据到缓存buffer
   void copyFrom(const void* src) { memcpy(buffer_, src, capacity); }
   // 获取缓存buffer
