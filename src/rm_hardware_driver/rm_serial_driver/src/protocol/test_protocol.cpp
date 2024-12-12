@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "rm_serial_driver/protocol/default_protocol.hpp"
+#include "rm_serial_driver/protocol/test_protocol.hpp"
 
 namespace fyt::serial_driver::protocol {
 

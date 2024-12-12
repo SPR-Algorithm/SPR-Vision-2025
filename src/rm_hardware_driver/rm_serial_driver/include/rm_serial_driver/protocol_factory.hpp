@@ -23,6 +23,7 @@
 #include "rm_serial_driver/protocol/default_protocol.hpp"
 #include "rm_serial_driver/protocol/infantry_protocol.hpp"
 #include "rm_serial_driver/protocol/sentry_protocol.hpp"
+#include "rm_serial_driver/protocol/test_protocol.hpp"
 
 namespace fyt::serial_driver {
 
@@ -45,6 +46,13 @@ public:
     if (protocol_type == "sentry") {
       return std::make_unique<protocol::ProtocolSentry>(port_name, enable_data_print);
     }
+    if (protocol_type == "test") {
+      return std::make_unique<protocol::TestProtocol>(port_name, enable_data_print);
+    }
+    {
+      /* code */
+    }
+    
 
     return nullptr;
   }

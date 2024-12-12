@@ -82,7 +82,9 @@ bool FixedPacketTool<capacity>::checkPacket(uint8_t *buffer, int recv_len) {
     return false;
   }
   // 检查帧头，帧尾,
-  if ((buffer[0] != 0xff) || (buffer[capacity - 1] != 0x0d)) {
+  // if ((buffer[0] != 0xff) || (buffer[capacity - 1] != 0x0d)) {
+  //修改为spr的通信协议
+  if ((buffer[0] != 0xFF) || (buffer[capacity - 1] != 0xFE)) {
     return false;
   }
   // TODO(gezp): 检查check_byte(buffer[capacity-2]),可采用异或校验(BCC)
