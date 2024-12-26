@@ -195,6 +195,9 @@ bool FixedPacketTool<capacity>::recvPacket(FixedPacket<capacity> &packet) {
       return false;
     }
     }
+    else{
+      return false;
+    }
   } else {
     FYT_ERROR("serial_driver", "transporter_->read() failed");
     // reconnect

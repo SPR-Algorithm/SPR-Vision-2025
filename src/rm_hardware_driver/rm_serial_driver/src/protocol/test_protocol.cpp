@@ -21,8 +21,8 @@ namespace fyt::serial_driver::protocol {
 
 TestProtocol::TestProtocol(std::string_view port_name, bool enable_data_print) {
   auto uart_transporter = std::make_shared<UartTransporter>(std::string(port_name));
-  packet_tool32 = std::make_shared<FixedPacketTool<32>>(uart_transporter);
-  packet_tool32->enbaleDataPrint(enable_data_print);
+  packet_tool33 = std::make_shared<FixedPacketTool<33>>(uart_transporter);
+  packet_tool33->enbaleDataPrint(enable_data_print);
   packet_tool16 = std::make_shared<FixedPacketTool<16>>(uart_transporter);
   packet_tool16->enbaleDataPrint(enable_data_print);
 }
@@ -69,8 +69,8 @@ void TestProtocol::send(const rm_interfaces::msg::GimbalCmd &data) {
 }
 
 bool TestProtocol::receive(rm_interfaces::msg::SerialReceiveData &data) {
-  FixedPacket<32> packet;
-  if (packet_tool32->recvPacket(packet)) {
+  FixedPacket<33> packet;
+  if (packet_tool33->recvPacket(packet)) {
      // game status
     uint8_t enemy_color;
     packet.unloadData(enemy_color, 1);
