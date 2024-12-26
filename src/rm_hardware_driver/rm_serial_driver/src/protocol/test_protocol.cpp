@@ -37,6 +37,7 @@ std::vector<rclcpp::SubscriptionBase::SharedPtr> TestProtocol::getSubscriptions(
   };
 }
 
+//下面没用
 //用来订阅tracker的id消息，填充gimbal里面的id数据，对应我们电控的逻辑
 // std::vector<rclcpp::SubscriptionBase::SharedPtr> TestProtocol::getidSubscription(
 //   rclcpp::Node::SharedPtr node) {

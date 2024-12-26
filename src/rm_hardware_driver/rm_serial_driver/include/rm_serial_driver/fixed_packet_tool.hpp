@@ -151,7 +151,7 @@ bool FixedPacketTool<capacity>::sendPacket(const FixedPacket<capacity> &packet) 
 template <int capacity>
 bool FixedPacketTool<capacity>::recvPacket(FixedPacket<capacity> &packet) {
   int recv_len = transporter_->read(tmp_buffer_, capacity);
-  if (recv_len > 0) {
+  if (recv_len > 0 && tmp_buffer_[0] != 0xFF) {
     // print data
     if (use_data_print_) {
       for (int i = 0; i < recv_len; i++) {
