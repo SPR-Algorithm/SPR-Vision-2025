@@ -36,13 +36,15 @@ public:
   std::vector<rclcpp::Client<rm_interfaces::srv::SetMode>::SharedPtr> getClients(
     rclcpp::Node::SharedPtr node) const override;
 
-  std::string getErrorMessage() override { return packet_tool_->getErrorMessage(); }
+  std::string getErrorMessage() override { return packet_tool32->getErrorMessage(); }
 
 private:
   // FixedPacketTool<16>::SharedPtr packet_tool_;
   enum GameStatus { NOT_START = 0x00, ENEMY_RED = 0x01, ENEMY_BLUE = 0x02 };
-  FixedPacketTool<32>::SharedPtr packet_tool_;
-  FixedPacket<32> packet_;
+  FixedPacketTool<32>::SharedPtr packet_tool32;
+  FixedPacketTool<16>::SharedPtr packet_tool16;
+  FixedPacket<32> packet32;
+  FixedPacket<16> packet16;
   rm_interfaces::msg::ChassisCmd chassis_cmd_;
 };
 }  // namespace fyt::serial_driver::protocol
