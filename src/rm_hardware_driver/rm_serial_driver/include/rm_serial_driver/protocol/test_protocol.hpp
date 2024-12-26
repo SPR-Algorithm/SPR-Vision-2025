@@ -16,6 +16,7 @@
 #ifndef SERIAL_DRIVER_TEST_PROTOCOL_HPP_
 #define SERIAL_DRIVER_TEST_PROTOCOL_HPP_
 
+#include "rm_interfaces/msg/chassis_cmd.hpp"
 #include "rm_serial_driver/protocol.hpp"
 
 namespace fyt::serial_driver::protocol {
@@ -38,7 +39,11 @@ public:
   std::string getErrorMessage() override { return packet_tool_->getErrorMessage(); }
 
 private:
-  FixedPacketTool<16>::SharedPtr packet_tool_;
+  // FixedPacketTool<16>::SharedPtr packet_tool_;
+  enum GameStatus { NOT_START = 0x00, ENEMY_RED = 0x01, ENEMY_BLUE = 0x02 };
+  FixedPacketTool<32>::SharedPtr packet_tool_;
+  FixedPacket<32> packet_;
+  rm_interfaces::msg::ChassisCmd chassis_cmd_;
 };
 }  // namespace fyt::serial_driver::protocol
 

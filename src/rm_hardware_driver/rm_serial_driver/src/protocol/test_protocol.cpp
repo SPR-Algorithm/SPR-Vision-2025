@@ -14,12 +14,14 @@
 // limitations under the License.
 
 #include "rm_serial_driver/protocol/test_protocol.hpp"
+// ros2
+#include <geometry_msgs/msg/twist.hpp>
 
 namespace fyt::serial_driver::protocol {
 
 TestProtocol::TestProtocol(std::string_view port_name, bool enable_data_print) {
   auto uart_transporter = std::make_shared<UartTransporter>(std::string(port_name));
-  packet_tool_ = std::make_shared<FixedPacketTool<16>>(uart_transporter);
+  packet_tool_ = std::make_shared<FixedPacketTool<32>>(uart_transporter);
   packet_tool_->enbaleDataPrint(enable_data_print);
 }
 
@@ -52,15 +54,15 @@ std::vector<rclcpp::Client<rm_interfaces::srv::SetMode>::SharedPtr> TestProtocol
 }
 
 void TestProtocol::send(const rm_interfaces::msg::GimbalCmd &data) {
-  FixedPacket<16> packet;
-  packet.loadData<unsigned char>(data.fire_advice ? FireState::Fire : FireState::NotFire, 1);
-  packet.loadData<float>(static_cast<float>(data.yaw), 2);
+  // FixedPacket<16> packet;
+  packet_.loadData<unsigned char>(data.fire_advice ? FireState::Fire : FireState::NotFire, 1);
+  packet_.loadData<float>(static_cast<float>(data.yaw), 2);
   //交换了pitch和distance的位置
-  packet.loadData<float>(static_cast<float>(data.pitch), 6);
-  packet.loadData<float>(static_cast<float>(data.distance), 10);
+  packet_.loadData<float>(static_cast<float>(data.pitch), 6);
+  packet_.loadData<float>(static_cast<float>(data.distance), 10);
   //添加我们的enemy_id，暂时不做
   // packet.loadData<float>(static_cast<float>(data.enemyid), 14);
-  packet_tool_->sendPacket(packet);
+  packet_tool_->sendPacket(packet_);
 }
 
 bool TestProtocol::receive(rm_interfaces::msg::SerialReceiveData &data) {
