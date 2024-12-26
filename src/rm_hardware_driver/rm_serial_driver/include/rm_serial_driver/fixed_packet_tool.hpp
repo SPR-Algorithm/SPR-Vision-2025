@@ -151,7 +151,7 @@ bool FixedPacketTool<capacity>::sendPacket(const FixedPacket<capacity> &packet) 
 template <int capacity>
 bool FixedPacketTool<capacity>::recvPacket(FixedPacket<capacity> &packet) {
   int recv_len = transporter_->read(tmp_buffer_, capacity);
-  if (recv_len > 0 && tmp_buffer_[0] != 0xFF) {
+  if (recv_len > 0) {
     // print data
     if (use_data_print_) {
       for (int i = 0; i < recv_len; i++) {
@@ -159,7 +159,7 @@ bool FixedPacketTool<capacity>::recvPacket(FixedPacket<capacity> &packet) {
       }
       std::cout << "\n";
     }
-
+    if(tmp_buffer_[0] == 0xFF){
     // check packet
     if (checkPacket(tmp_buffer_, recv_len)) {
       packet.copyFrom(tmp_buffer_);
@@ -193,6 +193,7 @@ bool FixedPacketTool<capacity>::recvPacket(FixedPacket<capacity> &packet) {
                tmp_buffer_[0],
                tmp_buffer_[recv_len - 1]);
       return false;
+    }
     }
   } else {
     FYT_ERROR("serial_driver", "transporter_->read() failed");
