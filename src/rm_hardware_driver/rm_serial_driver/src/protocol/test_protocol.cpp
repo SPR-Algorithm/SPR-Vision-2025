@@ -64,12 +64,31 @@ void TestProtocol::send(const rm_interfaces::msg::GimbalCmd &data) {
 }
 
 bool TestProtocol::receive(rm_interfaces::msg::SerialReceiveData &data) {
-  FixedPacket<16> packet;
+  FixedPacket<32> packet;
   if (packet_tool_->recvPacket(packet)) {
-    packet.unloadData(data.mode, 1);
-    packet.unloadData(data.roll, 2);
-    packet.unloadData(data.pitch, 6);
-    packet.unloadData(data.yaw, 10);
+     // game status
+    uint8_t enemy_color;
+    packet.unloadData(enemy_color, 1);
+    data.mode = (enemy_color == ENEMY_BLUE ? 1 : 0);
+
+    packet.unloadData(data.pitch, 8);
+    packet.unloadData(data.yaw, 12);
+    // 实际上是底盘角度
+    // packet.unloadData(data.chassis_yaw, 10);
+    // blood
+    // packet.unloadData(data.judge_system_data.blood, 14);
+    // remaining time
+    // packet.unloadData(data.judge_system_data.remaining_time, 16);
+    // outpost hp
+    // packet.unloadData(data.judge_system_data.outpost_hp, 20);
+    // operator control message
+    // packet.unloadData(data.judge_system_data.operator_command.is_outpost_attacking, 22);
+    // packet.unloadData(data.judge_system_data.operator_command.is_retreating, 23);
+    // packet.unloadData(data.judge_system_data.operator_command.is_drone_avoiding, 24);
+
+    // packet.unloadData(data.judge_system_data.game_status, 25);
+
+    data.bullet_speed = 25;
     return true;
   } else {
     return false;
