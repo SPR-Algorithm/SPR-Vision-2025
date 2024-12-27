@@ -159,45 +159,46 @@ bool FixedPacketTool<capacity>::recvPacket(FixedPacket<capacity> &packet) {
       }
       std::cout << "\n";
     }
-    if(tmp_buffer_[0] == 0xFF){
+    // if(tmp_buffer_[0] == 0xFF){
     // check packet
-    if (checkPacket(tmp_buffer_, recv_len)) {
+    // if (checkPacket(tmp_buffer_, recv_len)) {
+    if (tmp_buffer_[0] == 0xFF && tmp_buffer_[capacity - 4] == 0xFE) {
       packet.copyFrom(tmp_buffer_);
       return true;
     } else {
-      // 如果是断帧，拼接缓存，并遍历校验，获得合法数据
-      FYT_INFO("serial_driver", "checkPacket() failed, check if it is a broken frame");
-      if (recv_buf_len_ + recv_len > capacity * 2) {
-        recv_buf_len_ = 0;
-      }
-      // 拼接缓存
-      memcpy(recv_buffer_ + recv_buf_len_, tmp_buffer_, recv_len);
-      recv_buf_len_ = recv_buf_len_ + recv_len;
-      // 遍历校验
-      for (int i = 0; (i + capacity) <= recv_buf_len_; i++) {
-        if (checkPacket(recv_buffer_ + i, capacity)) {
-          packet.copyFrom(recv_buffer_ + i);
-          // 读取一帧后，更新接收缓存
-          int k = 0;
-          for (int j = i + capacity; j < recv_buf_len_; j++, k++) {
-            recv_buffer_[k] = recv_buffer_[j];
-          }
-          recv_buf_len_ = k;
-          return true;
-        }
-      }
-      // 表明断帧，或错误帧。
-      FYT_WARN("serial_driver",
-               "checkPacket() failed with recv_len:{}, frame head:{}, frame end:{}",
-               recv_len,
-               tmp_buffer_[0],
-               tmp_buffer_[recv_len - 1]);
+      FYT_INFO("serial_driver", "checkPacket() failed");
+      // // 如果是断帧，拼接缓存，并遍历校验，获得合法数据
+      // FYT_INFO("serial_driver", "checkPacket() failed, check if it is a broken frame");
+      // if (recv_buf_len_ + recv_len > capacity * 2) {
+      //   recv_buf_len_ = 0;
+      // }
+      // // 拼接缓存
+      // memcpy(recv_buffer_ + recv_buf_len_, tmp_buffer_, recv_len);
+      // recv_buf_len_ = recv_buf_len_ + recv_len;
+      // // 遍历校验
+      // for (int i = 0; (i + capacity) <= recv_buf_len_; i++) {
+      //   if (checkPacket(recv_buffer_ + i, capacity)) {
+      //     packet.copyFrom(recv_buffer_ + i);
+      //     // 读取一帧后，更新接收缓存
+      //     int k = 0;
+      //     for (int j = i + capacity; j < recv_buf_len_; j++, k++) {
+      //       recv_buffer_[k] = recv_buffer_[j];
+      //     }
+      //     recv_buf_len_ = k;
+      //     return true;
+      //   }
+      // }
+      // // 表明断帧，或错误帧。
+      // FYT_WARN("serial_driver",
+      //          "checkPacket() failed with recv_len:{}, frame head:{}, frame end:{}",
+      //          recv_len,
+      //          tmp_buffer_[0],
+      //          tmp_buffer_[recv_len - 1]);
       return false;
     }
-    }
-    else{
-      return false;
-    }
+    // else{
+    //   return false;
+    // }
   } else {
     FYT_ERROR("serial_driver", "transporter_->read() failed");
     // reconnect

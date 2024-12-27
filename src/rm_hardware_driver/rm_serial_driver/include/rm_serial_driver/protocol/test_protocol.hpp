@@ -36,14 +36,14 @@ public:
   std::vector<rclcpp::Client<rm_interfaces::srv::SetMode>::SharedPtr> getClients(
     rclcpp::Node::SharedPtr node) const override;
 
-  std::string getErrorMessage() override { return packet_tool33->getErrorMessage(); }
+  std::string getErrorMessage() override { return packet_tool16->getErrorMessage(); }
 
 private:
   // FixedPacketTool<16>::SharedPtr packet_tool_;
   enum GameStatus { NOT_START = 0x00, ENEMY_RED = 0x01, ENEMY_BLUE = 0x02 };
-  FixedPacketTool<33>::SharedPtr packet_tool33;
+  // FixedPacketTool<33>::SharedPtr packet_tool33;
   FixedPacketTool<16>::SharedPtr packet_tool16;
-  FixedPacket<33> packet33;
+  // FixedPacket<33> packet33;
   FixedPacket<16> packet16;
   rm_interfaces::msg::ChassisCmd chassis_cmd_;
 };

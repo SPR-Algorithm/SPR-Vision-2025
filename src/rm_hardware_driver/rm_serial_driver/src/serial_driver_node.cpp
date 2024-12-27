@@ -131,7 +131,7 @@ void SerialDriverNode::listenLoop() {
     } else {
       auto error_message = protocol_->getErrorMessage();
       error_message = error_message.empty() ? "unknown" : error_message;
-      FYT_WARN("serial_driver", "Failed to reveive packet! error message :{}", error_message);
+      FYT_WARN("serial_driver","Packet unstable, error message :{}", error_message);
       std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
   }
