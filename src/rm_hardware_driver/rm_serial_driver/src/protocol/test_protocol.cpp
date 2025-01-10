@@ -74,9 +74,11 @@ bool TestProtocol::receive(rm_interfaces::msg::SerialReceiveData &data) {
     uint8_t enemy_color;
     packet.unloadData(enemy_color, 1);
     data.mode = (enemy_color == ENEMY_BLUE ? 1 : 0);
+    packet.unloadData(data.pitch, 4);
+    packet.unloadData(data.yaw, 8);
+    std::cout<<"data.pitch:"<<data.pitch<<std::endl;
+    std::cout<<"data.yaw:"<<data.yaw<<std::endl;
 
-    packet.unloadData(data.pitch, 8);
-    packet.unloadData(data.yaw, 12);
     // 实际上是底盘角度
     // packet.unloadData(data.chassis_yaw, 10);
     // blood

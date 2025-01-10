@@ -156,6 +156,8 @@ bool FixedPacketTool<capacity>::recvPacket(FixedPacket<capacity> &packet) {
     if (use_data_print_) {
       for (int i = 0; i < recv_len; i++) {
         std::cout << std::hex << static_cast<int>(tmp_buffer_[i]) << " ";
+        //位操作变成浮点数打印显示
+        
       }
       std::cout << "\n";
     }

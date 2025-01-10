@@ -3,7 +3,7 @@
 <robot name="rm_gimbal"
   xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:arg name="xyz" default="0.10 0 0.05" />
+  <xacro:arg name="xyz" default="0.12 0 0.04" />
   <xacro:arg name="rpy" default="0 0 0" />
 
   <link name="odom" />
