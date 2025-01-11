@@ -167,7 +167,7 @@ cd spdlog && mkdir build && cd build
 cmake .. && make -j
 sudo make install
 ```
-如编译g2o出现关于该库的报错，按照错误提示在CmakeCache里面添加-fPIC选项
+cmake之后如下方fmt一样，在CmakeCache.txt里面添加-fPIC选项
 ## 4.FMT库存在重大依赖问题，需按照如下方式修复
 
 修改armor\_detector节点里armor\_detector.cpp的代码，在include里添加#include \<fmt/format.h>
@@ -177,7 +177,7 @@ sudo make install
 修改CMakeLists.txt，在指定位置添加如下行：
 
 ```
-Add -fPIC option
+#Add -fPIC option
 add_compile_options(-fPIC)
 ```
 
@@ -202,11 +202,11 @@ sudo make install
 
 如此，编译应该通过
 
-## 5.g2o编译性能过差卡死解决方案
+## 5.g2o编译
 
-将make -j改为make -j4
+性能过差卡死解决方案：将make -j改为make -j4或更小的数字，任何时候遇到编译性能问题都可如此尝试
 
-任何时候遇到编译性能问题都可如此尝试
+编译时同样需要添加-fPIC选项
 
 ## 6.Ceres-Solver安装
 rosdep提示缺少ceres是正常现象不必理会，确保apt中ceres的版本为2.0.0
