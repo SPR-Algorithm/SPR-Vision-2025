@@ -27,6 +27,9 @@
 #include "rm_utils/heartbeat.hpp"
 
 namespace fyt::auto_aim {
+//last cmd data
+auto last_yaw=0.0;
+auto last_pitch=0.0;
 ArmorSolverNode::ArmorSolverNode(const rclcpp::NodeOptions &options)
 : Node("armor_solver", options), solver_(nullptr) {
   // Register logger
@@ -35,6 +38,7 @@ ArmorSolverNode::ArmorSolverNode(const rclcpp::NodeOptions &options)
 
   debug_mode_ = this->declare_parameter("debug", true);
 
+  
   // Tracker
   double max_match_distance = this->declare_parameter("tracker.max_match_distance", 0.2);
   double max_match_yaw_diff = this->declare_parameter("tracker.max_match_yaw_diff", 1.0);
@@ -157,6 +161,8 @@ ArmorSolverNode::ArmorSolverNode(const rclcpp::NodeOptions &options)
 }
 
 void ArmorSolverNode::timerCallback() {
+  
+
   if (solver_ == nullptr) {
     return;
   }
@@ -183,6 +189,10 @@ void ArmorSolverNode::timerCallback() {
   if (armor_target_.tracking) {
     try {
       control_msg = solver_->solve(armor_target_, this->now(), tf2_buffer_);
+      last_yaw=control_msg.yaw;
+      last_pitch=control_msg.pitch;
+      FYT_DEBUG("armor_solver","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      std::cout<<"last yaw: "<<last_yaw<<" last pitch: "<<last_pitch<<std::endl;
     } catch (...) {
       FYT_ERROR("armor_solver", "Something went wrong in solver!");
       control_msg.yaw_diff = 0;
@@ -195,6 +205,8 @@ void ArmorSolverNode::timerCallback() {
     control_msg.pitch_diff = 0;
     control_msg.distance = -1;
     control_msg.fire_advice = false;
+    control_msg.yaw = last_yaw;
+    control_msg.pitch = last_pitch;
   }
   gimbal_pub_->publish(control_msg);
 

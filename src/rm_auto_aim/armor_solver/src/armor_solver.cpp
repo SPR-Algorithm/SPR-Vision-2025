@@ -178,8 +178,10 @@ rm_interfaces::msg::GimbalCmd Solver::solve(const rm_interfaces::msg::Target &ta
   double cmd_yaw = angles::normalize_angle(yaw + yaw_offset);
 
 
-  gimbal_cmd.yaw = cmd_yaw * 180 / M_PI;
-  gimbal_cmd.pitch = cmd_pitch * 180 / M_PI;  
+  // gimbal_cmd.yaw = cmd_yaw * 180 / M_PI;
+  // gimbal_cmd.pitch = cmd_pitch * 180 / M_PI; 
+  gimbal_cmd.yaw = cmd_yaw;
+  gimbal_cmd.pitch = cmd_pitch;
   gimbal_cmd.yaw_diff = (cmd_yaw - rpy_[2]) * 180 / M_PI;
   gimbal_cmd.pitch_diff = (cmd_pitch - rpy_[1]) * 180 / M_PI;
 

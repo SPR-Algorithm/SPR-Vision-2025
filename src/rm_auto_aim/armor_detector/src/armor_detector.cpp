@@ -62,11 +62,9 @@ std::vector<Armor> Detector::detect(const cv::Mat &input) noexcept {
           corner_corrector->correctCorners(armor, gray_img_);
         }
       });
-
     // 7. Erase the armors with ignore classes
     classifier->eraseIgnoreClasses(armors_);
   }
-
   return armors_;
 }
 
