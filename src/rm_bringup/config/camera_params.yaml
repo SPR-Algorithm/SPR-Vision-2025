@@ -1,0 +1,5 @@
+/camera_node:
+  ros__parameters:
+    camera_info_url: package://rm_bringup/config/camera_info.yaml
+    exposure_time: 5000
+    analog_gain: 64
