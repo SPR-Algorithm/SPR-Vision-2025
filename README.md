@@ -210,9 +210,13 @@ sudo make install
 
 ## 6.Ceres-Solver安装
 rosdep提示缺少ceres是正常现象不必理会，确保apt中ceres的版本为2.0.0
-## 7.OpenVINO部署
 
-选[Go to the latest documentation for up-to-date information](https://docs.openvino.ai/)导航至最新版本
+## 7.（罕见）Ceres-Solver编译中Cmake提示找不到tbb相关文件
+卸载当前的libtbb，并按顺序安装libtbb2，libtbb2-dev，libtbbmalloc2-dev
+
+## 8.OpenVINO部署
+
+选[Go to the latest documentation for up-to-date information](https://docs.openvino.ai/)导航至版本页面，最好是2022或者2024
 
 选择[Install OpenVINO](https://docs.openvino.ai/2024/get-started/install-openvino.html)
 
@@ -227,10 +231,12 @@ sudo apt update
 sudo apt install openvino
 ```
 
+## 9.串口协议通信调试
+所有的数据包均统一为16位的FixPacket，其中帧头0xFF，帧尾0xFE；
+发送给电控格式为：帧头0xFF，开火（1字节），Yaw（4字节），Pitch（4字节），Distance（4字节），留空（1字节），帧尾0xFE
+从电控接收格式为：帧头0xFF，颜色（1字节），填充（2字节）Pitch（4字节），Yaw（4字节），帧尾0xFE，留空（3字节）
 
-## 8.串口协议调试
-
-## 9.描述模型尺寸修改
+## 10.描述模型尺寸修改
 右手系，相机镜片平面中心与云台转动轴中心的相对位置
 
 # 以下是原项目仓库中的部署指南：
