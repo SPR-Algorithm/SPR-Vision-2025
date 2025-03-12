@@ -241,7 +241,7 @@ std::unique_ptr<Detector> ArmorDetectorNode::initDetector() {
           declare_parameter("armor.max_large_center_distance", 5.0),
       .max_angle = declare_parameter("armor.max_angle", 35.0)};
 
-  auto detector = std::make_unique<Detector>(binary_thres, EnemyColor::RED,
+  auto detector = std::make_unique<Detector>(binary_thres, EnemyColor::BLUE,
                                              l_params, a_params);
 
 
@@ -391,7 +391,7 @@ void ArmorDetectorNode::setModeCallback(
     std::shared_ptr<rm_interfaces::srv::SetMode::Response> response) {
   response->success = true;
   response->message = "0";
-
+  
   VisionMode mode = static_cast<VisionMode>(request->mode);
   std::string mode_name = visionModeToString(mode);
   if (mode_name == "UNKNOWN") {

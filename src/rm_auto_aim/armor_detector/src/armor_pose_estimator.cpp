@@ -84,7 +84,8 @@ ArmorPoseEstimator::extractArmorPoses(const std::vector<Armor> &armors,
       // Fill the distance to image center
       armor_msg.distance_to_image_center =
           pnp_solver_->calculateDistanceToCenter(armor.center);
-
+      //armor_msg.distance_to_image_center /=2;
+      std::cout<<"distance_to_image_center: "<<armor_msg.distance_to_image_center<<std::endl;
       armors_msg.push_back(std::move(armor_msg));
     } else {
       FYT_WARN("armor_detector", "PnP Failed!");

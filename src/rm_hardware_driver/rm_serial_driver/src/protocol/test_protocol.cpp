@@ -73,11 +73,12 @@ bool TestProtocol::receive(rm_interfaces::msg::SerialReceiveData &data) {
      // game status
     uint8_t enemy_color;
     packet.unloadData(enemy_color, 1);
-    data.mode = (enemy_color == ENEMY_BLUE ? 1 : 0);
+    // data.mode = (enemy_color == ENEMY_BLUE ? 1 : 0);
+    data.mode = enemy_color;
     packet.unloadData(data.pitch, 4);
     packet.unloadData(data.yaw, 8);
-    std::cout<<"data.pitch:"<<data.pitch<<std::endl;
-    std::cout<<"data.yaw:"<<data.yaw<<std::endl;
+    //std::cout<<"data.pitch:"<<data.pitch<<std::endl;
+    //std::cout<<"data.yaw:"<<data.yaw<<std::endl;
 
     // 实际上是底盘角度
     // packet.unloadData(data.chassis_yaw, 10);

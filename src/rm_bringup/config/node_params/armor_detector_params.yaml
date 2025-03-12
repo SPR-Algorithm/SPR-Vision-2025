@@ -2,11 +2,11 @@
   ros__parameters:
     debug: true
     target_frame: odom
-    detect_color: 0 # 0: red, 1: blue
+    detect_color: 1 # 0: red, 1: blue
     binary_thres: 90
 
-    use_pca: false # 使用PCA算法矫正灯条的角点
-    use_ba: false # 使用BA优化算法求解装甲板的Yaw角 
+    use_pca: true # 使用PCA算法矫正灯条的角点
+    use_ba: true # 使用BA优化算法求解装甲板的Yaw角 
 
     light.min_ratio: 0.0001
     light.max_ratio: 1.0

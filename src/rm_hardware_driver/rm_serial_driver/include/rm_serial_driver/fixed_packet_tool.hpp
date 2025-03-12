@@ -164,7 +164,7 @@ bool FixedPacketTool<capacity>::recvPacket(FixedPacket<capacity> &packet) {
     // if(tmp_buffer_[0] == 0xFF){
     // check packet
     // if (checkPacket(tmp_buffer_, recv_len)) {
-    if (tmp_buffer_[0] == 0xFF && tmp_buffer_[capacity - 4] == 0xFE) {
+    if (tmp_buffer_[0] == 0xFF && tmp_buffer_[2] == 0x00 && tmp_buffer_[3] == 0x00 && tmp_buffer_[capacity - 4] == 0xFE) {
       packet.copyFrom(tmp_buffer_);
       return true;
     } else {
