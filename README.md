@@ -111,6 +111,11 @@ Plugins->Configurations->Dynamic Reconfigure
 
 若没找到话题和节点记得点刷新
 
+### 标定部分
+
+安装
+sudo apt install ros-humble-camera-calibration
+
 然后运行
 
 ros2 run camera_calibration cameracalibrator --size 7x10 --square 0.03 image:=/image_raw camera:=/mv_camera
