@@ -191,8 +191,8 @@ void ArmorSolverNode::timerCallback() {
       control_msg = solver_->solve(armor_target_, this->now(), tf2_buffer_);
       last_yaw=control_msg.yaw;
       last_pitch=control_msg.pitch;
-      FYT_DEBUG("armor_solver","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-      std::cout<<"last yaw: "<<last_yaw<<" last pitch: "<<last_pitch<<std::endl;
+      //std::cout<<"distance: "<<control_msg.distance<<std::endl;
+      //std::cout<<"last yaw: "<<last_yaw<<" last pitch: "<<last_pitch<<std::endl;
     } catch (...) {
       FYT_ERROR("armor_solver", "Something went wrong in solver!");
       control_msg.yaw_diff = 0;

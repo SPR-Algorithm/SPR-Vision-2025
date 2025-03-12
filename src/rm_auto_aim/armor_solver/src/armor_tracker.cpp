@@ -63,6 +63,7 @@ void Tracker::init(const Armors::SharedPtr &armors_msg) noexcept {
   FYT_INFO("armor_solver", "Init EKF!");
 
   tracked_id = tracked_armor.number;
+  //tracked_id = "outpost";
   tracker_state = DETECTING;
 
   if (tracked_armor.type == "large" &&
