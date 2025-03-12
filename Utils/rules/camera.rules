@@ -1,0 +1,9 @@
+SUBSYSTEMS=="usb", 
+ATTRS{idVendor}=="f622", 
+ATTRS{idProduct}=="d132", 
+GROUP="users", 
+MODE="0777",
+SYMLINK+="camera"
+
+
+
