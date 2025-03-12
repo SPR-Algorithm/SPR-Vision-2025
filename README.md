@@ -210,17 +210,17 @@ sudo make install
 
 如此，编译应该通过
 
-## 5.g2o编译
+## 5.g2o（20241228_git）编译安装
 
 性能过差卡死解决方案：将make -j改为make -j4或更小的数字，任何时候遇到编译性能问题都可如此尝试
 
 编译时同样需要添加-fPIC选项
 
-## 6.Ceres-Solver安装
+## 6.Ceres-Solver 2.0.0（可能2.2.0）安装
 rosdep提示缺少ceres是正常现象不必理会，确保apt中ceres的版本为2.0.0
 若编译中Cmake提示找不到tbb相关文件，则卸载当前的libtbb，并按顺序安装libtbb2，libtbb2-dev，libtbbmalloc2-dev
 
-## 7.OpenVINO部署
+## 7.OpenVINO（2022-2024）部署
 
 选[Go to the latest documentation for up-to-date information](https://docs.openvino.ai/)导航至版本页面，最好是2022或者2024
 
@@ -320,7 +320,7 @@ sudo ldconfig
   ```bash
   sudo apt install libfmt-dev
   ```
-- Sophus库 (G2O库依赖)
+- Sophus库1.22.10 (G2O库依赖)
    ```bash
    git clone https://github.com/strasdat/Sophus
    cd Sophus
