@@ -91,7 +91,7 @@ sudo cp serial.rules  /etc/udev/rules.d/
 
 
 
-## 6. 启动相机节点
+## 6. 启动相机节点与相机标定
 
 使用USB连接相机
 
@@ -103,19 +103,27 @@ source install/setup.bash
 
 ros2 run mindvision\_camera mindvision\_camera\_node
 
-ros2 run armor\_detector armor\_detector\_node
-
 rqt添加
 
 Plugins->Visualization->Image View
 
 Plugins->Configurations->Dynamic Reconfigure
 
-rqt没找到话题和节点记得点刷新
+若没找到话题和节点记得点刷新
+
+然后运行
+
+ros2 run camera_calibration cameracalibrator --size 7x10 --square 0.03 image:=/image_raw camera:=/mv_camera
+
+按照进度条指示完全移动标定板，尽量使进度条变满，差不多后点击Calibrate；
+
+计算完成后点击Save，结果文件位于/tmp/calibrationdata.tar.gz
 
 
 
 ## 7. 启动识别节点调试
+
+ros2 run armor\_detector armor\_detector\_node
 
 rqt选择/armor\_detector节点配置，打开debug选项，可在左侧image view看到/detector/result\_img
 
@@ -210,11 +218,9 @@ sudo make install
 
 ## 6.Ceres-Solver安装
 rosdep提示缺少ceres是正常现象不必理会，确保apt中ceres的版本为2.0.0
+若编译中Cmake提示找不到tbb相关文件，则卸载当前的libtbb，并按顺序安装libtbb2，libtbb2-dev，libtbbmalloc2-dev
 
-## 7.（罕见）Ceres-Solver编译中Cmake提示找不到tbb相关文件
-卸载当前的libtbb，并按顺序安装libtbb2，libtbb2-dev，libtbbmalloc2-dev
-
-## 8.OpenVINO部署
+## 7.OpenVINO部署
 
 选[Go to the latest documentation for up-to-date information](https://docs.openvino.ai/)导航至版本页面，最好是2022或者2024
 
@@ -231,13 +237,33 @@ sudo apt update
 sudo apt install openvino
 ```
 
-## 9.串口协议通信调试
+## 8.串口协议通信调试
 所有的数据包均统一为16位的FixPacket，其中帧头0xFF，帧尾0xFE；
 发送给电控格式为：帧头0xFF，开火（1字节），Yaw（4字节），Pitch（4字节），Distance（4字节），留空（1字节），帧尾0xFE
 从电控接收格式为：帧头0xFF，颜色（1字节），填充（2字节）Pitch（4字节），Yaw（4字节），帧尾0xFE，留空（3字节）
 
-## 10.描述模型尺寸修改
+## 9.描述模型尺寸修改
 右手系，相机镜片平面中心与云台转动轴中心的相对位置
+
+## 10.代码编译部署
+若遇到类似
+CMake Error at /opt/ros/humble/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:240 (list):
+list index: 1 out of range (-1, 0)
+的问题，则表示路径中有非Unicode字符，将工作目录移动至无中文路径中删除build重新编译。
+
+若遇到类似error while loading shared libraries: libg2o_core.so: cannot open shared object file
+等g2o库等无法找到的问题，首先确保g2o已按照-fPIC参数正确编译并安装成功，若问题仍然存在，则使用如下命令编辑该文件：
+sudo gedit /etc/ld.so.conf
+并在文本编辑器中添加如下行：
+/usr/local/lib
+保存并退出，运行
+sudo ldconfig
+如此，问题应该解决。
+
+
+                            欢迎交流，有评论就更
+                        
+原文链接：https://blog.csdn.net/weixin_38258767/article/details/106875766
 
 # 以下是原项目仓库中的部署指南：
 ## 一、项目结构
