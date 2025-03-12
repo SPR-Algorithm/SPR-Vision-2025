@@ -181,7 +181,7 @@ cmake .. && make -j
 sudo make install
 ```
 cmake之后如下方fmt一样，在CmakeCache.txt里面添加-fPIC选项
-## 4.FMT库存在重大依赖问题，需按照如下方式修复
+## 4.FMT库编译安装
 
 修改armor\_detector节点里armor\_detector.cpp的代码，在include里添加#include \<fmt/format.h>
 
