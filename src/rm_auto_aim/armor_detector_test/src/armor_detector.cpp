@@ -54,12 +54,15 @@ std::vector<Armor> Detector::detect(const cv::Mat &input) noexcept {
       std::execution::par, armors_.begin(), armors_.end(), [this, &input](Armor &armor) {
         // 4. Extract the number image
         // 5. Do classification
+        for(auto &armor : armors_) {
+          armor.classfication_result = "outpost";
+          armor.number = "outpost";
+        }
         // 6. Correct the corners of the armor
         if (corner_corrector != nullptr) {
           corner_corrector->correctCorners(armor, gray_img_);
         }
       });
-
     // 7. Erase the armors with ignore classes
   }
 

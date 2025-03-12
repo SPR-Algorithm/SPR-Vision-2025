@@ -46,9 +46,9 @@ def generate_launch_description():
     # 图像
     # node_params = os.path.join(
     # get_package_share_directory('rm_bringup'), 'config', 'node_params', 'node_params.yaml')
-
+    
     node_params = os.path.join(
-    get_package_share_directory('rm_vision_bringup'), 'config', 'node_params.yaml')
+    get_package_share_directory('rm_bringup'), 'config', 'camera_params.yaml')
     def get_camera_node(package, plugin):
         return ComposableNode(
             package=package,
@@ -58,7 +58,6 @@ def generate_launch_description():
             extra_arguments=[{'use_intra_process_comms': True}]
         )
     image_node = get_camera_node('mindvision_camera', 'mindvision_camera::MVCameraNode')
-
 
     # 串口
     if launch_params['virtual_serial']:
