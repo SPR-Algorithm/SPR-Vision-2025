@@ -38,6 +38,8 @@ public:
 
   std::string getErrorMessage() override { return packet_tool16->getErrorMessage(); }
 
+  //bool reset();
+
 private:
   // FixedPacketTool<16>::SharedPtr packet_tool_;
   enum GameStatus { NOT_START = 0x00, ENEMY_RED = 0x01, ENEMY_BLUE = 0x02 };

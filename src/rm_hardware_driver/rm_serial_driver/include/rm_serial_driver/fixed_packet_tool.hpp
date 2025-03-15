@@ -169,6 +169,8 @@ bool FixedPacketTool<capacity>::recvPacket(FixedPacket<capacity> &packet) {
       return true;
     } else {
       FYT_INFO("serial_driver", "checkPacket() failed");
+      transporter_->close();
+      transporter_->open();
       // // 如果是断帧，拼接缓存，并遍历校验，获得合法数据
       // FYT_INFO("serial_driver", "checkPacket() failed, check if it is a broken frame");
       // if (recv_buf_len_ + recv_len > capacity * 2) {

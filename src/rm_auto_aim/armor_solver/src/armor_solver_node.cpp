@@ -189,8 +189,8 @@ void ArmorSolverNode::timerCallback() {
   if (armor_target_.tracking) {
     try {
       control_msg = solver_->solve(armor_target_, this->now(), tf2_buffer_);
-      last_yaw=control_msg.yaw;
-      last_pitch=control_msg.pitch;
+      //last_yaw=control_msg.yaw;
+      //last_pitch=control_msg.pitch;
       //std::cout<<"distance: "<<control_msg.distance<<std::endl;
       //std::cout<<"last yaw: "<<last_yaw<<" last pitch: "<<last_pitch<<std::endl;
     } catch (...) {
@@ -200,16 +200,16 @@ void ArmorSolverNode::timerCallback() {
       control_msg.distance = -1;
       control_msg.fire_advice = false;
     }
+    gimbal_pub_->publish(control_msg);
   } else {
     control_msg.yaw_diff = 0;
     control_msg.pitch_diff = 0;
     control_msg.distance = -1;
     control_msg.fire_advice = false;
-    control_msg.yaw = last_yaw;
-    control_msg.pitch = last_pitch;
+    //control_msg.yaw = last_yaw;
+    //control_msg.pitch = last_pitch;
   }
-  gimbal_pub_->publish(control_msg);
-
+  
   if (debug_mode_) {
     publishMarkers(armor_target_, control_msg);
   }

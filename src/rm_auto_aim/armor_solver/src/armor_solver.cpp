@@ -112,7 +112,7 @@ rm_interfaces::msg::GimbalCmd Solver::solve(const rm_interfaces::msg::Target &ta
   double yaw, pitch;
   calcYawAndPitch(chosen_armor_position, rpy_, yaw, pitch);
   double distance = chosen_armor_position.norm();
-
+  std::cout<<"distance:"<<distance<<std::endl;
   // Initialize gimbal_cmd
   rm_interfaces::msg::GimbalCmd gimbal_cmd;
   gimbal_cmd.header = target.header;

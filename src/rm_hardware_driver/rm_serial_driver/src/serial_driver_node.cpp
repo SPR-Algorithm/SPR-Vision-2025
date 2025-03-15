@@ -137,6 +137,7 @@ void SerialDriverNode::listenLoop() {
       error_message = error_message.empty() ? "unknown" : error_message;
       FYT_WARN("serial_driver","Packet unstable, error message :{}", error_message);
       std::this_thread::sleep_for(std::chrono::milliseconds(50));
+      // protocol_->reset();
     }
   }
 }

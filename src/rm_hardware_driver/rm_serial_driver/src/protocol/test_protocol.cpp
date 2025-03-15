@@ -102,4 +102,9 @@ bool TestProtocol::receive(rm_interfaces::msg::SerialReceiveData &data) {
   }
 }
 
+// bool TestProtocol::reset() {
+//   packet_tool16->reset();
+//   return true;
+// }
+
 }  // namespace fyt::serial_driver::protocol
