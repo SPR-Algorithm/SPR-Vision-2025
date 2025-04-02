@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/c4abf805-2ec8-453b-90ed-23c1549c6840)# SPR2025 Vision Project
+# SPR2025 Vision Project
 
 中国石油大学SPR战队25赛季视觉项目主仓库
 
@@ -36,6 +36,7 @@ sudo apt install ros-humble-serial-driver
 ```
 sudo apt remove brltty
 ```
+![image](https://github.com/user-attachments/assets/c4abf805-2ec8-453b-90ed-23c1549c6840)
 下载ch341驱动
 
 按照压缩包内英文readme配置驱动
