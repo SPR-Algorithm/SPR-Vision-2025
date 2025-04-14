@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/spr/SPR-Vision-2025/
+cd /home/spr/SPR-Vision-2025/Main_ws
 
 source install/setup.bash 
 
