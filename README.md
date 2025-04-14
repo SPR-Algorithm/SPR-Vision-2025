@@ -20,7 +20,7 @@
 # 全流程部署指南
 
 ## 1. 安装Ubuntu 22.04 LTS
-建议安装时选择Minimal Installation
+建议安装时选择Minimal Installation，可以少点没用的东西。
 
 ## 2. fishros安装ros2 humble desktop
 ```
@@ -41,7 +41,7 @@ sudo apt remove brltty
 
 按照压缩包内英文readme配置驱动
 
-/*以下步骤可能多此一举，但如果遇到配置完不生效可尝试
+### 以下步骤可能多此一举，但如果遇到配置完不生效可尝试
 
 编译时若提示cmake版本过低，可按如下文章方法安装cmake 3.24
 
@@ -84,7 +84,7 @@ depends:        usbserial
 
 问题应该解决
 
-*/
+### 安装完成后：
 
 验证：lsmod | grep ch34
 ch341                  24576  0
