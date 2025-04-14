@@ -90,6 +90,13 @@ depends:        usbserial
 ch341                  24576  0
 usbserial              69632  1 ch341
 
+## 4.使用一键安装脚本安装依赖
+```
+chmod +x install_from_zips.sh
+./install_from_zips.sh
+```
+## 以下为手动安装方法，一键安装脚本遇到问题时，可单独对照进行debug
+
 ## 4.安装spdlog库（版本1.14）
 压缩包解压后cd进去
 ```
