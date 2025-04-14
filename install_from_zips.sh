@@ -4,6 +4,8 @@
 echo "This script requires sudo privileges. Please enter your password:"
 sudo -v
 
+cd Utils
+
 # 检查sudo是否成功
 if [ $? -ne 0 ]; then
     echo "Failed to obtain sudo privileges. Exiting."
@@ -21,6 +23,8 @@ sudo apt-get install -y ros-humble-foxglove-bridge
 sudo apt-get install -y ros-humble-serial-driver
 sudo apt-get install -y ros-humble-camera-calibration
 sudo apt-get install -y libgoogle-glog-dev
+sudo apt-get install -y libmetis-dev
+sudo apt-get install -y libsuitesparse-dev
 sudo apt-get remove -y brltty
 
 # 遍历当前目录下的所有zip文件

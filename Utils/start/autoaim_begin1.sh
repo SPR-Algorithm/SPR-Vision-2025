@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
-cd /home/spr/Desktop/SPR_utils/start/
+cd /home/spr/SPR-Vision-2025/Utils/start/
 
 ./autoaim_begin.sh
