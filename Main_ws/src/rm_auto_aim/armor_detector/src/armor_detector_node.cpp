@@ -153,6 +153,7 @@ void ArmorDetectorNode::imageCallback(
   // Get the transform from odom to gimbal
   try {
     rclcpp::Time target_time = img_msg->header.stamp;
+    //std::cout<<img_msg->header.frame_id,<<std::endl;
     auto odom_to_gimbal = tf2_buffer_->lookupTransform(
         odom_frame_, img_msg->header.frame_id, target_time,
         rclcpp::Duration::from_seconds(0.01));

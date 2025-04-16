@@ -50,7 +50,7 @@ public:
                                           rvecs,
                                           tvecs,
                                           false,
-                                          method_);
+                                          cv::SOLVEPNP_IPPE);
       return solutions > 0;
     } else {
       return false;
@@ -72,7 +72,7 @@ public:
                           rvec,
                           tvec,
                           false,
-                          method_);
+                          cv::SOLVEPNP_IPPE);
     } else {
       return false;
     }
@@ -90,7 +90,7 @@ private:
   std::unordered_map<std::string, std::vector<cv::Point3f>> object_points_map_;
   cv::Mat camera_matrix_;
   cv::Mat distortion_coefficients_;
-  cv::SolvePnPMethod method_;
+  cv::SolvePnPMethod method_=cv::SOLVEPNP_IPPE;
 };
 }  // namespace fyt
 #endif  // RM_UTILS_PNP_SOLVER_HPP_

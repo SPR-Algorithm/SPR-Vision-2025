@@ -41,9 +41,11 @@ ArmorPoseEstimator::extractArmorPoses(const std::vector<Armor> &armors,
                                    Eigen::Matrix3d R_imu_camera) {
   std::vector<rm_interfaces::msg::Armor> armors_msg;
 
+
+
   for (const auto &armor : armors) {
     std::vector<cv::Mat> rvecs, tvecs;
-
+    //std::cout<<armor.landmarks()<<std::endl;
     // Use PnP to get the initial pose information
     if (pnp_solver_->solvePnPGeneric(
             armor.landmarks(), rvecs, tvecs,
@@ -81,6 +83,7 @@ ArmorPoseEstimator::extractArmorPoses(const std::vector<Armor> &armors,
       armor_msg.pose.orientation.z = q.z();
       armor_msg.pose.orientation.w = q.w();
 
+      //std::cout<<armor.center<<std::endl;
       // Fill the distance to image center
       armor_msg.distance_to_image_center =
           pnp_solver_->calculateDistanceToCenter(armor.center);
@@ -150,7 +153,8 @@ void ArmorPoseEstimator::sortPnPResult(const Armor &armor,
       M_PI;
   double angle = (l_angle + r_angle) / 2;
   angle += 90.0;
-
+  // std::cout<<l_angle<<std::endl;
+  // std::cout<<r_angle<<std::endl;
   if (armor.number == "outpost") angle = -angle;
 
   // 根据倾斜角度选择解

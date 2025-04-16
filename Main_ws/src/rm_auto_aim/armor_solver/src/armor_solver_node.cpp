@@ -264,6 +264,8 @@ void ArmorSolverNode::initMarkers() noexcept {
 }
 
 void ArmorSolverNode::armorsCallback(const rm_interfaces::msg::Armors::SharedPtr armors_msg) {
+  
+  //std::cout<<"start  solver"<<std::endl;
   // Lazy initialize solver owing to weak_from_this() can't be called in constructor
   if (solver_ == nullptr) {
     solver_ = std::make_unique<Solver>(weak_from_this());

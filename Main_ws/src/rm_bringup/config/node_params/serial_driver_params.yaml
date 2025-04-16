@@ -1,8 +1,8 @@
 /**:
   ros__parameters:
     target_frame: odom
-    timestamp_offset: 0.006
-    port_name: "/dev/ttyUSB1"
+    timestamp_offset: 0.0
+    port_name: "/dev/ttyUSB0"
     protocol: "test"
-    enable_data_print: true # 改为true将会打印从串口读出来的16进制数据
+    enable_data_print: false # 改为true将会打印从串口读出来的16进制数据
 

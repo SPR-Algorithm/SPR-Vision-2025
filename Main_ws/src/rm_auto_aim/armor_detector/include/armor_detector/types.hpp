@@ -97,7 +97,7 @@ struct Light : public cv::RotatedRect {
 
 // Struct used to store the armor
 struct Armor {
-  static constexpr const int N_LANDMARKS = 6;
+  static constexpr const int N_LANDMARKS = 4;
   static constexpr const int N_LANDMARKS_2 = N_LANDMARKS * 2;
   Armor() = default;
   Armor(const Light &l1, const Light &l2) {

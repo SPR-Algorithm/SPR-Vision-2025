@@ -1,7 +1,7 @@
 /**:
   ros__parameters:
     camera_info_url: package://rm_bringup/config/camera_info.yaml
-    exposure_time: 2500
+    exposure_time: 5000
     gain: 15.0
     resolution_width: 1280
     resolution_height: 1024
