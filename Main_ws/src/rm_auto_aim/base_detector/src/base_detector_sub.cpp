@@ -15,7 +15,7 @@ public:
             std::bind(&ImageSubscriber::image_callback, this, std::placeholders::_1));
 
         cv::namedWindow("object", cv::WINDOW_AUTOSIZE);
-        cv::namedWindow("thresh", cv::WINDOW_AUTOSIZE);
+        // cv::namedWindow("thresh", cv::WINDOW_AUTOSIZE);
     }
 
 private:
@@ -45,7 +45,7 @@ private:
         cv::medianBlur(gray_img, dst_img, 7);
         // cv::threshold(gray_img, dst_img, 200, 255, cv::THRESH_BINARY);
         std::vector<cv::Vec3f> circles;
-        cv::HoughCircles(dst_img, circles, cv::HOUGH_GRADIENT, 1, 50, 100, 100, 0, 1000);
+        cv::HoughCircles(dst_img, circles, cv::HOUGH_GRADIENT, 1, 30, 35, 100, 0, 1000);
         for (size_t i = 0; i < circles.size(); ++i) {
             cv::Vec3i c = circles[i];
             cv::Point center = cv::Point(c[0], c[1]);
