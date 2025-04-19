@@ -40,40 +40,42 @@ private:
 
     void detect_objects(cv::Mat &image)
     {
-        cv::Mat gray_img, thresh_img;
+        cv::Mat gray_img, thresh_img,binary_img;
         cv::cvtColor(image, gray_img, cv::COLOR_BGR2GRAY);
         cv::Mat dst_img;
         cv::medianBlur(gray_img, dst_img, 7);
-        cv::threshold(gray_img, binary_img, 200, 255, cv::THRESH_BINARY);
-        std::vector<cv::Vec3f> circles;
-        cv::HoughCircles(dst_img, circles, cv::HOUGH_GRADIENT, 1, 30, 35, 100, 0, 1000);
-        for (size_t i = 0; i < circles.size(); ++i) {
-            cv::Vec3i c = circles[i];
-            cv::Point center = cv::Point(c[0], c[1]);
-            int radius = c[2];
-            cv::circle(image, center, radius, cv::Scalar(255, 0, 0), 10);
-            cv::circle(image, center, 10, cv::Scalar(255, 0, 0), -1);
-        }
+        cv::threshold(gray_img, binary_img, 230, 255, cv::THRESH_BINARY);
 
-
-
-
-        // std::vector<std::vector<cv::Point>> contours;
-        // std::vector<cv::Vec4i> hierarchy;
-        // cv::findContours(thresh_img, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_NONE);
-       
-        // for (const auto &cnt : contours)
-        // {
-        //     if (cnt.size() < 100)
-        //         continue;
-
-        //     cv::Rect rect = cv::boundingRect(cnt);
-        //     cv::drawContours(image, std::vector<std::vector<cv::Point>>{cnt}, -1, cv::Scalar(0, 0, 255), 2);
-        //     cv::circle(image,
-        //                cv::Point(rect.x + rect.width / 2, rect.y + rect.height / 2),
-        //                5, cv::Scalar(0, 255, 0), -1);
+        // 本来想用霍夫圆的，但是效果不太好
+        // std::vector<cv::Vec3f> circles;
+        // cv::HoughCircles(dst_img, circles, cv::HOUGH_GRADIENT, 1, 30, 35, 100, 0, 1000);
+        // for (size_t i = 0; i < circles.size(); ++i) {
+        //     cv::Vec3i c = circles[i];
+        //     cv::Point center = cv::Point(c[0], c[1]);
+        //     int radius = c[2];
+        //     cv::circle(image, center, radius, cv::Scalar(255, 0, 0), 10);
+        //     cv::circle(image, center, 10, cv::Scalar(255, 0, 0), -1);
         // }
-        // cv::imshow("thresh",thresh_img);
+
+
+
+
+        std::vector<std::vector<cv::Point>> contours;
+        std::vector<cv::Vec4i> hierarchy;
+        cv::findContours(thresh_img, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_NONE);
+       
+        for (const auto &cnt : contours)
+        {
+            if (cnt.size() < 100)
+                continue;
+
+            cv::Rect rect = cv::boundingRect(cnt);
+            cv::drawContours(image, std::vector<std::vector<cv::Point>>{cnt}, -1, cv::Scalar(0, 0, 255), 2);
+            cv::circle(image,
+                       cv::Point(rect.x + rect.width / 2, rect.y + rect.height / 2),
+                       5, cv::Scalar(0, 255, 0), -1);
+        }
+        cv::imshow("thresh",thresh_img);
         cv::imshow("object", image);
         cv::imshow("thresh", binary_img);
   
