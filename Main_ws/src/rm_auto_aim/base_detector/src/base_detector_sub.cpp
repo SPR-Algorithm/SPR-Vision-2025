@@ -15,6 +15,7 @@ public:
             std::bind(&ImageSubscriber::image_callback, this, std::placeholders::_1));
 
         cv::namedWindow("object", cv::WINDOW_AUTOSIZE);
+        cv::namedWindow("thresh", cv::WINDOW_AUTOSIZE);
         // cv::namedWindow("thresh", cv::WINDOW_AUTOSIZE);
     }
 
@@ -43,7 +44,7 @@ private:
         cv::cvtColor(image, gray_img, cv::COLOR_BGR2GRAY);
         cv::Mat dst_img;
         cv::medianBlur(gray_img, dst_img, 7);
-        // cv::threshold(gray_img, dst_img, 200, 255, cv::THRESH_BINARY);
+        cv::threshold(gray_img, binary_img, 200, 255, cv::THRESH_BINARY);
         std::vector<cv::Vec3f> circles;
         cv::HoughCircles(dst_img, circles, cv::HOUGH_GRADIENT, 1, 30, 35, 100, 0, 1000);
         for (size_t i = 0; i < circles.size(); ++i) {
@@ -74,6 +75,7 @@ private:
         // }
         // cv::imshow("thresh",thresh_img);
         cv::imshow("object", image);
+        cv::imshow("thresh", binary_img);
   
         cv::waitKey(10);
     }
