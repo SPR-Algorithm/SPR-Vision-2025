@@ -39,7 +39,7 @@ for ZIP_FILE in *.zip; do
         # 替换cere的cmake里面的FindTBB
         if [[ "${ZIP_FILE%.zip}" == "ceres-solver-2.0.0" ]]; then
             echo "change FindTBB"
-            cp ../../FindTBB_new.cmake ./FindTBB.cmake
+            cp ../FindTBB_new.cmake ./FindTBB.cmake
         fi
 
         # 创建build目录并进入
