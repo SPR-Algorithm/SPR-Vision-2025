@@ -216,8 +216,8 @@ sudo gedit /etc/ld.so.conf
 sudo ldconfig
 如此，问题应该解决。
 原文链接：https://blog.csdn.net/weixin_38258767/article/details/106875766
-
-# 以下是原项目仓库中的部署指南：
+<details>
+<summary>以下是原项目仓库中的部署指南：</summary>
 ## 一、项目结构
 
 *表示不在本仓库中直接提供，这部分模块已在[CSU-RM-Sentry](https://github.com/baiyeweiguang/CSU-RM-Sentry)开源
@@ -426,3 +426,4 @@ limitations under the License.
 - 重写PnP选解逻辑
 - 修改了BA优化的代码，抽象出新的类ArmorPoseEstimator
 - 为中国石油大学SPR机器人队代码做了适应性部署
+</details>
