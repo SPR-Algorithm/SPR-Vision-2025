@@ -217,7 +217,7 @@ sudo ldconfig
 如此，问题应该解决。
 原文链接：https://blog.csdn.net/weixin_38258767/article/details/106875766
 <details>
-<summary># 以下是原项目仓库中的部署指南：</summary>
+<summary>以下是原项目仓库中的部署指南：</summary>
 ## 一、项目结构
 
 *表示不在本仓库中直接提供，这部分模块已在[CSU-RM-Sentry](https://github.com/baiyeweiguang/CSU-RM-Sentry)开源
