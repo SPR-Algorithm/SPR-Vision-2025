@@ -2,19 +2,17 @@
 
 中国石油大学SPR战队2025赛季视觉项目主仓库
 
-完全基于中南大学2024年视觉开源，很遗憾我们的开发规模不足以支持对现有的系统再做出除内部适配外更多的改动
+基于中南大学2024年视觉开源，很遗憾我们的开发规模不足以支持对现有的系统再做出除内部适配外更多的改动
 
 该项目在原rm_vision项目上扩展了自瞄选板、能量机关识别与预测、哨兵定位、自主导航等功能，为RoboMaster机器人实现了一套通用的算法框架
 
 # 各兵种针对部署备忘录
-哨兵：不发送last_yaw&pitch
-其他：发送
-各台车的相机内参以及相机-云台变换尺寸均需要针对修改修改
+各台车的相机内参以及相机-云台变换尺寸均需要针对实际进行修改
 
 # 全流程部署指南
 
 ## 1. 安装Ubuntu 22.04 LTS
-建议安装时选择Minimal Installation，可以少点没用的东西。
+强烈建议安装时选择Minimal Installation，可以少点没用的东西。
 
 ## 2. fishros安装ros2 humble desktop
 ```
@@ -26,56 +24,31 @@ sudo apt install ros-humble-foxglove-bridge
 sudo apt install ros-humble-serial-driver
 ```
 
-## 3. 编译安装CH341驱动并配置串口
+## 3.使用一键安装脚本安装依赖
+```
+chmod +x install_from_zips.sh
+./install_from_zips.sh
+```
+
+## 4. 编译安装CH341驱动并配置串口
 ```
 sudo apt remove brltty
 ```
 ![image](https://github.com/user-attachments/assets/c4abf805-2ec8-453b-90ed-23c1549c6840)
-下载ch341驱动
-
-按照压缩包内英文readme配置驱动
-
-### 以下步骤可能多此一举，但如果遇到配置完不生效可尝试
-
-编译时若提示cmake版本过低，可按如下文章方法安装cmake 3.24
-
-https://blog.csdn.net/tanmx219/article/details/123495065
-
-主要是
-
-chmod + x cmake-3.24.0-linux-x86\_64.sh
-
-sudo ./cmake的sh文件 --skip-license --exclude-subdir --prefix=/usr/local
-
-这两句
-
-cmake官网https://cmake.org/files/
-
-uname -r获取linux内核版本
-
-下载对应内核版本的ch341.c
-
-https://elixir.bootlin.com/linux/v6.8/source/drivers/usb/serial/ch341.c
-
-替换文件夹内ch341.c文件
-
-进入driver文件夹
-
-make
+下载并按照压缩包内readme配置串口驱动
 
 如果提示没有gcc-12，使用apt安装gcc-12
-
-sudo make install
-
 如果提示insmod: ERROR: could not insert module ch341.ko: Unknown symbol in module
 
-进行
-
+则进行
+```
 modinfo ch341.ko |grep depends
 depends:        usbserial
-
-然后sudo modprobe usbserial
-
+```
+然后
+```
+sudo modprobe usbserial
+```
 问题应该解决
 
 ### 安装完成后：
@@ -84,14 +57,9 @@ depends:        usbserial
 ch341                  24576  0
 usbserial              69632  1 ch341
 
-## 4.使用一键安装脚本安装依赖
-```
-chmod +x install_from_zips.sh
-./install_from_zips.sh
-```
 ## 以下为手动安装方法，一键安装脚本遇到问题时，可单独对照进行debug
 
-## 4.安装spdlog库（版本1.14）
+### 安装spdlog库（版本1.14）
 压缩包解压后cd进去
 ```
 mkdir build && cd build
@@ -99,7 +67,8 @@ cmake .. && make -j4
 sudo make install
 ```
 cmake之后如下方fmt一样，在CmakeCache.txt里面添加-fPIC选项
-## 5.安装FMT库（版本10.2.1）
+
+### 安装FMT库（版本10.2.1）
 //已完成
 修改armor\_detector节点里armor\_detector.cpp的代码，在include里添加#include \<fmt/format.h>
 
@@ -131,7 +100,7 @@ sudo make install
 ```
 如此，编译应该通过
 
-## 6.安装g2o库（版本20241228_git）
+### 安装g2o库（版本20230806_git）
 压缩包解压后cd进去
 ```
 mkdir build && cd build
@@ -142,7 +111,7 @@ sudo make install
 
 编译时同样需要添加-fPIC选项！
 
-## 7.安装Ceres-Solver库（版本2.0.0）（可能2.2.0）
+### 安装Ceres-Solver库（版本2.0.0）（可能2.2.0）
 压缩包解压后cd进去
 ```
 mkdir build && cd build
@@ -152,17 +121,17 @@ sudo make install
 rosdep提示缺少ceres是正常现象不必理会，确保apt中libceres的版本为2.0.0
 若编译中Cmake提示找不到tbb相关文件，则卸载当前的libtbb，并按顺序安装libtbb2，libtbb2-dev，libtbbmalloc2-dev
 
-## 8.安装OpenVINO
-引擎搜索Install OpenVINO，选择介于2022-2024之间的版本，Distribution选择APT方式，并按照官网指示完成安装。
-
-## 9.添加串口&相机的权限规则
+### 添加串口&相机的权限规则
 ```
 sudo cp camera.rules  /etc/udev/rules.d/
 sudo cp serial.rules  /etc/udev/rules.d/
 ```
 添加后重启生效
 
-## 10.部署测试SPR-Vision-2025
+## 5.安装OpenVINO
+引擎搜索Install OpenVINO，选择介于2022-2024之间的版本，Distribution选择APT方式，并按照官网指示完成安装。
+
+## 6.部署测试SPR-Vision-2025
 在src上层运行
 ```
 rosdepc update
@@ -175,7 +144,10 @@ source install/setup.bash
 ros2 launch rm_bringup bringup.launch_mvtest.py
 ```
 
-## 11. 启动相机节点与调试环境设置与相机标定
+## 7. 启动相机节点与调试环境设置与相机标定
+标定板PDF生成网站：
+https://calib.io/pages/camera-calibration-pattern-generator
+注意打印时一定要避免因打印页面缩放导致的尺寸误差！
 
 使用USB连接相机
 
@@ -209,7 +181,7 @@ ros2 run camera_calibration cameracalibrator --size 7x10 --square 0.03 image:=/i
 按照进度条指示完全移动标定板，尽量使进度条变满，差不多后点击Calibrate；
 计算完成后点击Save，结果文件位于/tmp/calibrationdata.tar.gz
 
-## 12. 单独启动识别节点调试
+## 8. 单独启动识别节点调试
 
 ros2 run armor\_detector armor\_detector\_node
 
@@ -217,16 +189,16 @@ rqt选择/armor\_detector节点配置，打开debug选项，可在左侧image vi
 
 调整相机对焦和光圈，使其能识别出装甲板且置信度稳定在100%
 
-## 13.串口协议通信调试
+## 9.串口协议通信调试
 所有的数据包均统一为16位的FixPacket，其中帧头0xFF，帧尾0xFE；
 发送给电控格式为：帧头0xFF，开火（1字节），Yaw（4字节），Pitch（4字节），Distance（4字节），留空（1字节），帧尾0xFE
 从电控接收格式为：帧头0xFF，颜色（1字节），填充（2字节）Pitch（4字节），Yaw（4字节），帧尾0xFE，留空（3字节）
 遇到通信错误导致
 
-## 14.云台-相机描述模型尺寸修改
+## 10.云台-相机描述模型尺寸修改
 右手系，相机镜片平面中心与云台转动轴中心的相对位置，根据兵种情况修改xyz
 
-## 15.代码编译部署错误备忘
+## 11.代码编译部署错误备忘
 若遇到类似Something went wrong while looing up transform之类的串口通信问题，按照
 检查硬件连接->CuteCom检查串口接收通信工作情况->检查数据校验是否成功
 的步骤，依次检查与下位机的通信情况
