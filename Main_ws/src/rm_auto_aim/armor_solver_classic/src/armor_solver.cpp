@@ -437,7 +437,7 @@ std::vector<cv::Point2f> Solver::reproject_single_armor(const Eigen::Vector3d &x
   auto cos_yaw = std::cos(yaw);
   auto sin_pitch = std::sin(pitch);
   auto cos_pitch = std::cos(pitch);
-
+  
   // clang-format off
   const Eigen::Matrix3d R_armor2world {
     {cos_yaw * cos_pitch, -sin_yaw, cos_yaw * sin_pitch},
@@ -481,7 +481,7 @@ std::vector<cv::Point2f> Solver::reproject_single_armor(const Eigen::Vector3d &x
     tf2::Quaternion tf_q_gimbal;
     tf2::fromMsg(msg_q_gimbal, tf_q_gimbal);
     tf2::Matrix3x3 mat_gimbal(tf_q_gimbal);
-    
+
     for (int i = 0; i < 3; ++i) {
       for (int j = 0; j < 3; ++j) {
         R_gimbal2world(i, j) = mat_gimbal[i][j];

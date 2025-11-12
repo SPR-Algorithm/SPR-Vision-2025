@@ -350,11 +350,8 @@ void ArmorSolverNode::armorsCallback(const rm_interfaces::msg::Armors::SharedPtr
     dt_ = (time - last_time_).seconds();
     tracker_->lost_thres = std::abs(static_cast<int>(lost_time_thres_ / dt_));
 
-    if (tracker_->tracked_id == "outpost") {
-      tracker_->ekf->setPredictFunc(Predict{dt_, MotionModel::CONSTANT_VEL_ROT});
-    } else {
-      tracker_->ekf->setPredictFunc(Predict{dt_, MotionModel::CONSTANT_VEL_ROT});
-    }
+    // 设置预测函数（前哨站和其他机器人使用相同的运动模型）
+    tracker_->ekf->setPredictFunc(Predict{dt_, MotionModel::CONSTANT_VEL_ROT});
     tracker_->update(armors_msg);
     // Publish measurement
     measure_msg.x = tracker_->measurement(0);
@@ -686,11 +683,153 @@ void ArmorSolverNode::drawReprojectedArmors(cv::Mat &image,
   }
   
   // 绘制检测到的装甲板（红色）
-  for (const auto &armor : armors_ptr->armors) {
-    // 绘制装甲板中心点（如果pose中有有效信息）
-    // 注意：这里需要从armor.pose中提取2D点，或者从检测结果中获取
-    // 由于armor消息中可能没有直接的2D点信息，这里先跳过
-    // 如果需要，可以从检测器发布的消息中获取
+  // 使用armor的pose信息，将3D点投影到2D图像平面
+  if (solver_ && latest_camera_info_) {
+    // 获取相机参数（在循环外获取，避免重复计算）
+    const auto &K = latest_camera_info_->k;
+    cv::Mat camera_matrix = (cv::Mat_<double>(3, 3) << 
+      K[0], K[1], K[2],
+      K[3], K[4], K[5],
+      K[6], K[7], K[8]);
+    
+    const auto &D = latest_camera_info_->d;
+    cv::Mat dist_coeffs = cv::Mat::zeros(1, 5, CV_64F);
+    for (size_t i = 0; i < D.size() && i < 5; ++i) {
+      dist_coeffs.at<double>(0, i) = D[i];
+    }
+    
+    // 定义3D模型点（在函数外部定义，避免重复）
+    constexpr double BIG_ARMOR_WIDTH = 230e-3;    // m
+    constexpr double SMALL_ARMOR_WIDTH = 135e-3;   // m
+    constexpr double LIGHTBAR_LENGTH = 56e-3;      // m
+    static const std::vector<cv::Point3f> BIG_POINTS{
+      {0, BIG_ARMOR_WIDTH / 2, LIGHTBAR_LENGTH / 2},
+      {0, -BIG_ARMOR_WIDTH / 2, LIGHTBAR_LENGTH / 2},
+      {0, -BIG_ARMOR_WIDTH / 2, -LIGHTBAR_LENGTH / 2},
+      {0, BIG_ARMOR_WIDTH / 2, -LIGHTBAR_LENGTH / 2}
+    };
+    static const std::vector<cv::Point3f> SMALL_POINTS{
+      {0, SMALL_ARMOR_WIDTH / 2, LIGHTBAR_LENGTH / 2},
+      {0, -SMALL_ARMOR_WIDTH / 2, LIGHTBAR_LENGTH / 2},
+      {0, -SMALL_ARMOR_WIDTH / 2, -LIGHTBAR_LENGTH / 2},
+      {0, SMALL_ARMOR_WIDTH / 2, -LIGHTBAR_LENGTH / 2}
+    };
+    
+    for (const auto &armor : armors_ptr->armors) {
+      try {
+        // 重要：armor.pose已经在transformArmorsToWorldCoordinates中被转换到世界坐标系(odom)
+        // 需要将其转换回相机坐标系才能进行投影
+        geometry_msgs::msg::PoseStamped armor_pose_world;
+        armor_pose_world.header = armors_ptr->header;
+        armor_pose_world.header.frame_id = target_frame_;  // 当前在odom坐标系
+        armor_pose_world.pose = armor.pose;
+        
+        // 转换回相机坐标系
+        geometry_msgs::msg::PoseStamped armor_pose_camera;
+        try {
+          armor_pose_camera = tf2_buffer_->transform(armor_pose_world, "camera_link");
+        } catch (const tf2::TransformException &ex) {
+          FYT_WARN("armor_solver", "Failed to transform armor pose to camera frame: {}", ex.what());
+          continue;
+        }
+        
+        // 获取armor在相机坐标系中的3D位置和姿态
+        Eigen::Vector3d armor_position(
+          armor_pose_camera.pose.position.x,
+          armor_pose_camera.pose.position.y,
+          armor_pose_camera.pose.position.z
+        );
+        
+        // 从四元数获取旋转矩阵（装甲板坐标系到相机坐标系）
+        Eigen::Quaterniond armor_quaternion(
+          armor_pose_camera.pose.orientation.w,
+          armor_pose_camera.pose.orientation.x,
+          armor_pose_camera.pose.orientation.y,
+          armor_pose_camera.pose.orientation.z
+        );
+        Eigen::Matrix3d R_armor2camera = armor_quaternion.toRotationMatrix();
+        
+        // 选择装甲板3D模型点（根据armor类型）
+        const std::vector<cv::Point3f> *object_points = nullptr;
+        if (armor.type == "large" || armor.type == "big") {
+          object_points = &BIG_POINTS;
+        } else {
+          object_points = &SMALL_POINTS;
+        }
+        
+        // 将3D模型点从装甲板坐标系转换到相机坐标系
+        // armor_pose_camera.pose.position是装甲板中心在相机坐标系中的位置
+        // armor_pose_camera.pose.orientation是装甲板坐标系到相机坐标系的旋转
+        std::vector<cv::Point3f> object_points_camera;
+        for (const auto &pt : *object_points) {
+          Eigen::Vector3d pt_armor(pt.x, pt.y, pt.z);
+          // 将装甲板坐标系中的点转换到相机坐标系
+          Eigen::Vector3d pt_camera = R_armor2camera * pt_armor + armor_position;
+          object_points_camera.push_back(cv::Point3f(
+            pt_camera.x(), pt_camera.y(), pt_camera.z()
+          ));
+        }
+        
+        // 投影到2D图像平面
+        // 由于点已经在相机坐标系中，rvec和tvec都为零
+        cv::Vec3d rvec(0, 0, 0);
+        cv::Vec3d tvec(0, 0, 0);
+        std::vector<cv::Point2f> image_points;
+        cv::projectPoints(object_points_camera, rvec, tvec, 
+                         camera_matrix, dist_coeffs, image_points);
+        
+        // 绘制检测到的装甲板（红色）
+        if (image_points.size() >= 4) {
+          std::vector<cv::Point> contour;
+          for (const auto &point : image_points) {
+            int x = static_cast<int>(point.x);
+            int y = static_cast<int>(point.y);
+            if (x >= 0 && x < image.cols && y >= 0 && y < image.rows) {
+              contour.push_back(cv::Point(x, y));
+            }
+          }
+          
+          if (contour.size() >= 4) {
+            // 绘制装甲板边框（红色）
+            cv::polylines(image, contour, true, cv::Scalar(0, 0, 255), 2, cv::LINE_AA);
+            
+            // 绘制装甲板角点（红色）
+            for (const auto &point : image_points) {
+              int x = static_cast<int>(point.x);
+              int y = static_cast<int>(point.y);
+              if (x >= 0 && x < image.cols && y >= 0 && y < image.rows) {
+                cv::circle(image, cv::Point(x, y), 3, cv::Scalar(0, 0, 255), -1);
+              }
+            }
+            
+            // 绘制装甲板中心点
+            cv::Point2f center(0, 0);
+            for (const auto &point : image_points) {
+              center += point;
+            }
+            center /= static_cast<float>(image_points.size());
+            int cx = static_cast<int>(center.x);
+            int cy = static_cast<int>(center.y);
+            if (cx >= 0 && cx < image.cols && cy >= 0 && cy < image.rows) {
+              cv::circle(image, cv::Point(cx, cy), 5, cv::Scalar(0, 0, 255), -1);
+            }
+            
+            // 添加装甲板编号
+            if (!armor.number.empty()) {
+              int x = static_cast<int>(center.x);
+              int y = static_cast<int>(center.y) - 15;
+              if (x >= 0 && x < image.cols && y >= 0 && y < image.rows) {
+                cv::putText(image, "Det_" + armor.number, cv::Point(x, y), 
+                           cv::FONT_HERSHEY_SIMPLEX, 0.6, cv::Scalar(0, 0, 255), 2);
+              }
+            }
+          }
+        }
+      } catch (const std::exception &e) {
+        FYT_WARN("armor_solver", "Error drawing detected armor: {}", e.what());
+        continue;
+      }
+    }
   }
   
   // 添加图例
