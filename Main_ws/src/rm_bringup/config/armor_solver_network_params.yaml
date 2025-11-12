@@ -43,8 +43,8 @@
       iteration_times: 20
       relative_yaw_angle_deviation: 2.0 # 相对yaw宽容度
       relative_yaw_angle_deviation_output: 6.0 # 前哨站相对yaw宽容度
-      velocity_factor: 1.5 # 线速度
-      angular_velocity_factor: 1.62 # 角速度
+      velocity_factor: 1.5 # 线速度系数
+      angular_velocity_factor: 1.62 # 角速度系数 
        # 补偿的迭代次数
       # ["距离下限, 距离上限, 高度下限, 高度下限, pitch轴补偿值"]
       angle_offset: [

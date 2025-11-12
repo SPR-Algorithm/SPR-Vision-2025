@@ -1,0 +1,292 @@
+[0.237s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'list', '-p', '--base-paths', '/home/firefly/SPR-Vision-2026/Main_ws/src', '--log-base', '/dev/null']
+[0.237s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='list', build_base='build', ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['/home/firefly/SPR-Vision-2026/Main_ws/src', '--log-base', '/dev/null'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], topological_order=False, names_only=False, paths_only=True, topological_graph=False, topological_graph_dot=False, topological_graph_density=False, topological_graph_legend=False, topological_graph_dot_cluster=False, topological_graph_dot_include_skipped=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x6fffcc02fbb0>, verb_extension=<colcon_package_information.verb.list.ListVerb object at 0x6fffcc02edd0>, main=<bound method ListVerb.main of <colcon_package_information.verb.list.ListVerb object at 0x6fffcc02edd0>>)
+[0.331s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.332s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.332s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.332s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.332s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.332s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/firefly/SPR-Vision-2026/Main_ws/src', '/home/firefly/SPR-Vision-2026/Main_ws/src/--log-base', '/dev/null'
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extensions ['ignore', 'ignore_ament_install']
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extension 'ignore'
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extension 'ignore_ament_install'
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extensions ['colcon_pkg']
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extension 'colcon_pkg'
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extensions ['colcon_meta']
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extension 'colcon_meta'
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extensions ['ros']
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extension 'ros'
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extensions ['cmake', 'python']
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extension 'cmake'
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extension 'python'
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extensions ['python_setup_py']
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src) by extension 'python_setup_py'
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/auto_aim_interfaces) by extensions ['ignore', 'ignore_ament_install']
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/auto_aim_interfaces) by extension 'ignore'
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/auto_aim_interfaces) by extension 'ignore_ament_install'
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/auto_aim_interfaces) by extensions ['colcon_pkg']
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/auto_aim_interfaces) by extension 'colcon_pkg'
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/auto_aim_interfaces) by extensions ['colcon_meta']
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/auto_aim_interfaces) by extension 'colcon_meta'
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/auto_aim_interfaces) by extensions ['ros']
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/auto_aim_interfaces) by extension 'ros'
+[0.341s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/auto_aim_interfaces' with type 'ros.ament_cmake' and name 'auto_aim_interfaces'
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/log) by extensions ['ignore', 'ignore_ament_install']
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/log) by extension 'ignore'
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/log) ignored
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extensions ['ignore', 'ignore_ament_install']
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extension 'ignore'
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extension 'ignore_ament_install'
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extensions ['colcon_pkg']
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extension 'colcon_pkg'
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extensions ['colcon_meta']
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extension 'colcon_meta'
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extensions ['ros']
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extension 'ros'
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extensions ['cmake', 'python']
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extension 'cmake'
+[0.342s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extension 'python'
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extensions ['python_setup_py']
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim) by extension 'python_setup_py'
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_classic) by extensions ['ignore', 'ignore_ament_install']
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_classic) by extension 'ignore'
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_classic) by extension 'ignore_ament_install'
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_classic) by extensions ['colcon_pkg']
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_classic) by extension 'colcon_pkg'
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_classic) by extensions ['colcon_meta']
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_classic) by extension 'colcon_meta'
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_classic) by extensions ['ros']
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_classic) by extension 'ros'
+[0.344s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_classic' with type 'ros.ament_cmake' and name 'armor_detector_classic'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_network) by extensions ['ignore', 'ignore_ament_install']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_network) by extension 'ignore'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_network) by extension 'ignore_ament_install'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_network) by extensions ['colcon_pkg']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_network) by extension 'colcon_pkg'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_network) by extensions ['colcon_meta']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_network) by extension 'colcon_meta'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_network) by extensions ['ros']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_network) by extension 'ros'
+[0.345s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_detector_network' with type 'ros.ament_cmake' and name 'armor_detector_network'
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_classic) by extensions ['ignore', 'ignore_ament_install']
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_classic) by extension 'ignore'
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_classic) by extension 'ignore_ament_install'
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_classic) by extensions ['colcon_pkg']
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_classic) by extension 'colcon_pkg'
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_classic) by extensions ['colcon_meta']
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_classic) by extension 'colcon_meta'
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_classic) by extensions ['ros']
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_classic) by extension 'ros'
+[0.346s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_classic' with type 'ros.ament_cmake' and name 'armor_solver_classic'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_network) by extensions ['ignore', 'ignore_ament_install']
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_network) by extension 'ignore'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_network) by extension 'ignore_ament_install'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_network) by extensions ['colcon_pkg']
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_network) by extension 'colcon_pkg'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_network) by extensions ['colcon_meta']
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_network) by extension 'colcon_meta'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_network) by extensions ['ros']
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_network) by extension 'ros'
+[0.347s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/armor_solver_network' with type 'ros.ament_cmake' and name 'armor_solver_network'
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/rm_auto_aim) by extensions ['ignore', 'ignore_ament_install']
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/rm_auto_aim) by extension 'ignore'
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/rm_auto_aim) by extension 'ignore_ament_install'
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/rm_auto_aim) by extensions ['colcon_pkg']
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/rm_auto_aim) by extension 'colcon_pkg'
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/rm_auto_aim) by extensions ['colcon_meta']
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/rm_auto_aim) by extension 'colcon_meta'
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/rm_auto_aim) by extensions ['ros']
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/rm_auto_aim) by extension 'ros'
+[0.348s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_auto_aim/rm_auto_aim' with type 'ros.ament_cmake' and name 'rm_auto_aim'
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_bringup) by extensions ['ignore', 'ignore_ament_install']
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_bringup) by extension 'ignore'
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_bringup) by extension 'ignore_ament_install'
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_bringup) by extensions ['colcon_pkg']
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_bringup) by extension 'colcon_pkg'
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_bringup) by extensions ['colcon_meta']
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_bringup) by extension 'colcon_meta'
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_bringup) by extensions ['ros']
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_bringup) by extension 'ros'
+[0.348s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_bringup' with type 'ros.ament_cmake' and name 'rm_bringup'
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extensions ['ignore', 'ignore_ament_install']
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extension 'ignore'
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extension 'ignore_ament_install'
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extensions ['colcon_pkg']
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extension 'colcon_pkg'
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extensions ['colcon_meta']
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extension 'colcon_meta'
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extensions ['ros']
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extension 'ros'
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extensions ['cmake', 'python']
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extension 'cmake'
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extension 'python'
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extensions ['python_setup_py']
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver) by extension 'python_setup_py'
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/daheng_camera) by extensions ['ignore', 'ignore_ament_install']
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/daheng_camera) by extension 'ignore'
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/daheng_camera) by extension 'ignore_ament_install'
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/daheng_camera) by extensions ['colcon_pkg']
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/daheng_camera) by extension 'colcon_pkg'
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/daheng_camera) by extensions ['colcon_meta']
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/daheng_camera) by extension 'colcon_meta'
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/daheng_camera) by extensions ['ros']
+[0.349s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/daheng_camera) by extension 'ros'
+[0.350s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/daheng_camera' with type 'ros.ament_cmake' and name 'daheng_camera'
+[0.350s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/hik_camera) by extensions ['ignore', 'ignore_ament_install']
+[0.350s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/hik_camera) by extension 'ignore'
+[0.350s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/hik_camera) by extension 'ignore_ament_install'
+[0.350s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/hik_camera) by extensions ['colcon_pkg']
+[0.350s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/hik_camera) by extension 'colcon_pkg'
+[0.350s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/hik_camera) by extensions ['colcon_meta']
+[0.350s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/hik_camera) by extension 'colcon_meta'
+[0.350s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/hik_camera) by extensions ['ros']
+[0.350s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/hik_camera) by extension 'ros'
+[0.350s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/hik_camera' with type 'ros.ament_cmake' and name 'hik_camera'
+[0.350s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/mindvision_camera) by extensions ['ignore', 'ignore_ament_install']
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/mindvision_camera) by extension 'ignore'
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/mindvision_camera) by extension 'ignore_ament_install'
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/mindvision_camera) by extensions ['colcon_pkg']
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/mindvision_camera) by extension 'colcon_pkg'
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/mindvision_camera) by extensions ['colcon_meta']
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/mindvision_camera) by extension 'colcon_meta'
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/mindvision_camera) by extensions ['ros']
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/mindvision_camera) by extension 'ros'
+[0.351s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/mindvision_camera' with type 'ros.ament_cmake' and name 'mindvision_camera'
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/rm_serial_driver) by extensions ['ignore', 'ignore_ament_install']
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/rm_serial_driver) by extension 'ignore'
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/rm_serial_driver) by extension 'ignore_ament_install'
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/rm_serial_driver) by extensions ['colcon_pkg']
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/rm_serial_driver) by extension 'colcon_pkg'
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/rm_serial_driver) by extensions ['colcon_meta']
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/rm_serial_driver) by extension 'colcon_meta'
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/rm_serial_driver) by extensions ['ros']
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/rm_serial_driver) by extension 'ros'
+[0.352s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_hardware_driver/rm_serial_driver' with type 'ros.ament_cmake' and name 'rm_serial_driver'
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_interfaces) by extensions ['ignore', 'ignore_ament_install']
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_interfaces) by extension 'ignore'
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_interfaces) by extension 'ignore_ament_install'
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_interfaces) by extensions ['colcon_pkg']
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_interfaces) by extension 'colcon_pkg'
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_interfaces) by extensions ['colcon_meta']
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_interfaces) by extension 'colcon_meta'
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_interfaces) by extensions ['ros']
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_interfaces) by extension 'ros'
+[0.353s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_interfaces' with type 'ros.ament_cmake' and name 'rm_interfaces'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_robot_description) by extensions ['ignore', 'ignore_ament_install']
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_robot_description) by extension 'ignore'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_robot_description) by extension 'ignore_ament_install'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_robot_description) by extensions ['colcon_pkg']
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_robot_description) by extension 'colcon_pkg'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_robot_description) by extensions ['colcon_meta']
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_robot_description) by extension 'colcon_meta'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_robot_description) by extensions ['ros']
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_robot_description) by extension 'ros'
+[0.353s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_robot_description' with type 'ros.ament_cmake' and name 'rm_robot_description'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extensions ['ignore', 'ignore_ament_install']
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extension 'ignore'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extension 'ignore_ament_install'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extensions ['colcon_pkg']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extension 'colcon_pkg'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extensions ['colcon_meta']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extension 'colcon_meta'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extensions ['ros']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extension 'ros'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extensions ['cmake', 'python']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extension 'cmake'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extension 'python'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extensions ['python_setup_py']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune) by extension 'python_setup_py'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rm_rune) by extensions ['ignore', 'ignore_ament_install']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rm_rune) by extension 'ignore'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rm_rune) by extension 'ignore_ament_install'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rm_rune) by extensions ['colcon_pkg']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rm_rune) by extension 'colcon_pkg'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rm_rune) by extensions ['colcon_meta']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rm_rune) by extension 'colcon_meta'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rm_rune) by extensions ['ros']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rm_rune) by extension 'ros'
+[0.354s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rm_rune' with type 'ros.ament_cmake' and name 'rm_rune'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_detector) by extensions ['ignore', 'ignore_ament_install']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_detector) by extension 'ignore'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_detector) by extension 'ignore_ament_install'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_detector) by extensions ['colcon_pkg']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_detector) by extension 'colcon_pkg'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_detector) by extensions ['colcon_meta']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_detector) by extension 'colcon_meta'
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_detector) by extensions ['ros']
+[0.355s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_detector) by extension 'ros'
+[0.355s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_detector' with type 'ros.ament_cmake' and name 'rune_detector'
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_solver) by extensions ['ignore', 'ignore_ament_install']
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_solver) by extension 'ignore'
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_solver) by extension 'ignore_ament_install'
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_solver) by extensions ['colcon_pkg']
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_solver) by extension 'colcon_pkg'
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_solver) by extensions ['colcon_meta']
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_solver) by extension 'colcon_meta'
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_solver) by extensions ['ros']
+[0.356s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_solver) by extension 'ros'
+[0.356s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_rune/rune_solver' with type 'ros.ament_cmake' and name 'rune_solver'
+[0.357s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_utils) by extensions ['ignore', 'ignore_ament_install']
+[0.357s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_utils) by extension 'ignore'
+[0.357s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_utils) by extension 'ignore_ament_install'
+[0.357s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_utils) by extensions ['colcon_pkg']
+[0.357s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_utils) by extension 'colcon_pkg'
+[0.357s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_utils) by extensions ['colcon_meta']
+[0.357s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_utils) by extension 'colcon_meta'
+[0.357s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_utils) by extensions ['ros']
+[0.357s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rm_utils) by extension 'ros'
+[0.357s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rm_utils' with type 'ros.ament_cmake' and name 'rm_utils'
+[0.357s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extensions ['ignore', 'ignore_ament_install']
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extension 'ignore'
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extension 'ignore_ament_install'
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extensions ['colcon_pkg']
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extension 'colcon_pkg'
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extensions ['colcon_meta']
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extension 'colcon_meta'
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extensions ['ros']
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extension 'ros'
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extensions ['cmake', 'python']
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extension 'cmake'
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extension 'python'
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extensions ['python_setup_py']
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss) by extension 'python_setup_py'
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_core) by extensions ['ignore', 'ignore_ament_install']
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_core) by extension 'ignore'
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_core) by extension 'ignore_ament_install'
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_core) by extensions ['colcon_pkg']
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_core) by extension 'colcon_pkg'
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_core) by extensions ['colcon_meta']
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_core) by extension 'colcon_meta'
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_core) by extensions ['ros']
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_core) by extension 'ros'
+[0.359s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_core' with type 'ros.ament_cmake' and name 'rmoss_core'
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_interfaces) by extensions ['ignore', 'ignore_ament_install']
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_interfaces) by extension 'ignore'
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_interfaces) by extension 'ignore_ament_install'
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_interfaces) by extensions ['colcon_pkg']
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_interfaces) by extension 'colcon_pkg'
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_interfaces) by extensions ['colcon_meta']
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_interfaces) by extension 'colcon_meta'
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_interfaces) by extensions ['ros']
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_interfaces) by extension 'ros'
+[0.360s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_interfaces' with type 'ros.ament_cmake' and name 'rmoss_interfaces'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_projectile_motion) by extensions ['ignore', 'ignore_ament_install']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_projectile_motion) by extension 'ignore'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_projectile_motion) by extension 'ignore_ament_install'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_projectile_motion) by extensions ['colcon_pkg']
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_projectile_motion) by extension 'colcon_pkg'
+[0.361s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_projectile_motion) by extensions ['colcon_meta']
+[0.361s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_projectile_motion) by extension 'colcon_meta'
+[0.361s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_projectile_motion) by extensions ['ros']
+[0.361s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_projectile_motion) by extension 'ros'
+[0.361s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_projectile_motion' with type 'ros.ament_cmake' and name 'rmoss_projectile_motion'
+[0.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_util) by extensions ['ignore', 'ignore_ament_install']
+[0.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_util) by extension 'ignore'
+[0.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_util) by extension 'ignore_ament_install'
+[0.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_util) by extensions ['colcon_pkg']
+[0.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_util) by extension 'colcon_pkg'
+[0.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_util) by extensions ['colcon_meta']
+[0.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_util) by extension 'colcon_meta'
+[0.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_util) by extensions ['ros']
+[0.362s] Level 1:colcon.colcon_core.package_identification:_identify(/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_util) by extension 'ros'
+[0.362s] DEBUG:colcon.colcon_core.package_identification:Package '/home/firefly/SPR-Vision-2026/Main_ws/src/rmoss/rmoss_util' with type 'ros.ament_cmake' and name 'rmoss_util'
+[0.362s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
