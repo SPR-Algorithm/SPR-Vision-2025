@@ -178,31 +178,23 @@ ArmorSolverNode::ArmorSolverNode(const rclcpp::NodeOptions &options)
     initMarkers();
   }
 
-  // 反投影可视化初始化
-  enable_reprojection_visualization_ = this->declare_parameter("enable_reprojection_visualization", true);
-  if (enable_reprojection_visualization_) {
-    // 初始化图像传输
-    image_transport_ = std::make_unique<image_transport::ImageTransport>(this->shared_from_this());
-    
-    // 创建图像发布器
-    reprojection_img_pub_ = image_transport_->advertise("armor_solver/reprojection_image", 1);
-    
-    // 订阅相机信息
-    cam_info_sub_ = this->create_subscription<sensor_msgs::msg::CameraInfo>(
-      "camera_info", 10,
-      [this](const sensor_msgs::msg::CameraInfo::SharedPtr msg) {
-        this->cameraInfoCallback(msg);
-      });
-    
-    // 订阅原始图像
-    image_sub_ = this->create_subscription<sensor_msgs::msg::Image>(
-      "image_raw", 10,
-      [this](const sensor_msgs::msg::Image::SharedPtr msg) {
-        this->imageCallback(msg);
-      });
-    
-    FYT_INFO("armor_solver", "Reprojection visualization enabled!");
-  }
+  // 反投影可视化初始化 (已注释)
+  // enable_reprojection_visualization_ = this->declare_parameter("enable_reprojection_visualization", true);
+  // if (enable_reprojection_visualization_) {
+  //   image_transport_ = std::make_unique<image_transport::ImageTransport>(this->shared_from_this());
+  //   reprojection_img_pub_ = image_transport_->advertise("armor_solver/reprojection_image", 1);
+  //   cam_info_sub_ = this->create_subscription<sensor_msgs::msg::CameraInfo>(
+  //     "camera_info", 10,
+  //     [this](const sensor_msgs::msg::CameraInfo::SharedPtr msg) {
+  //       this->cameraInfoCallback(msg);
+  //     });
+  //   image_sub_ = this->create_subscription<sensor_msgs::msg::Image>(
+  //     "image_raw", 10,
+  //     [this](const sensor_msgs::msg::Image::SharedPtr msg) {
+  //       this->imageCallback(msg);
+  //     });
+  //   FYT_INFO("armor_solver", "Reprojection visualization enabled!");
+  // }
 
   // Heartbeat
   heartbeat_ = HeartBeatPublisher::create(this);
@@ -317,10 +309,10 @@ void ArmorSolverNode::armorsCallback(const rm_interfaces::msg::Armors::SharedPtr
   // Lazy initialize solver owing to weak_from_this() can't be called in constructor
   if (solver_ == nullptr) {
     solver_ = std::make_unique<Solver>(weak_from_this());
-    // 如果已经有相机信息，立即设置
-    if (latest_camera_info_) {
-      solver_->setCameraParameters(latest_camera_info_);
-    }
+    // 反投影相关 - 相机参数设置 (已注释)
+    // if (latest_camera_info_) {
+    //   solver_->setCameraParameters(latest_camera_info_);
+    // }
   }
 
   // 实现装甲板位置从云台坐标系转换到世界坐标系的增强功能
@@ -390,10 +382,10 @@ void ArmorSolverNode::armorsCallback(const rm_interfaces::msg::Armors::SharedPtr
   armor_target_ = target_msg;
   target_pub_->publish(target_msg);
 
-  // 发布反投影可视化图像
-  if (enable_reprojection_visualization_ && latest_image_ && latest_camera_info_ && solver_) {
-    publishReprojectionImage(target_msg, armors_msg);
-  }
+  // 反投影相关 - 发布反投影可视化图像 (已注释)
+  // if (enable_reprojection_visualization_ && latest_image_ && latest_camera_info_ && solver_) {
+  //   publishReprojectionImage(target_msg, armors_msg);
+  // }
 
   last_time_ = time;
 }
@@ -575,26 +567,24 @@ void ArmorSolverNode::transformArmorsToWorldCoordinates(
   }
 }
 
-// 相机信息回调函数
-void ArmorSolverNode::cameraInfoCallback(const sensor_msgs::msg::CameraInfo::SharedPtr camera_info) {
-  latest_camera_info_ = camera_info;
-  
-  // 将相机参数传递给solver
-  if (solver_) {
-    solver_->setCameraParameters(camera_info);
-  }
-  
-  FYT_INFO("armor_solver", "Received camera_info: {}x{}, fx={:.2f}, fy={:.2f}", 
-           camera_info->width, camera_info->height,
-           camera_info->k[0], camera_info->k[4]);
-}
+// 反投影相关 - 相机信息回调 (已注释)
+// void ArmorSolverNode::cameraInfoCallback(const sensor_msgs::msg::CameraInfo::SharedPtr camera_info) {
+//   latest_camera_info_ = camera_info;
+//   if (solver_) {
+//     solver_->setCameraParameters(camera_info);
+//   }
+//   FYT_INFO("armor_solver", "Received camera_info: {}x{}, fx={:.2f}, fy={:.2f}",
+//            camera_info->width, camera_info->height,
+//            camera_info->k[0], camera_info->k[4]);
+// }
 
-// 图像回调函数
-void ArmorSolverNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr image_msg) {
-  latest_image_ = image_msg;
-}
+// 反投影相关 - 图像回调 (已注释)
+// void ArmorSolverNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr image_msg) {
+//   latest_image_ = image_msg;
+// }
 
-// 发布反投影图像
+// 反投影相关 - 发布反投影图像 (已注释)
+#if 0
 void ArmorSolverNode::publishReprojectionImage(const rm_interfaces::msg::Target &target_msg,
                                                const rm_interfaces::msg::Armors::SharedPtr armors_ptr) {
   try {
@@ -841,6 +831,7 @@ void ArmorSolverNode::drawReprojectedArmors(cv::Mat &image,
   cv::putText(image, "Red: Detected", legend_pos, 
              cv::FONT_HERSHEY_SIMPLEX, 0.7, cv::Scalar(0, 0, 255), 2);
 }
+#endif
 
 }  // namespace fyt::auto_aim
 

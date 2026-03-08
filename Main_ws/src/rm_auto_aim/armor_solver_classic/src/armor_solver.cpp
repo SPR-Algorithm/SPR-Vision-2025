@@ -71,51 +71,43 @@ Solver::Solver(std::weak_ptr<rclcpp::Node> n) : node_(n) {
   overflow_count_ = 0;
   transfer_thresh_ = 5;
 
-  // 初始化相机参数为默认值（将从camera_info消息中更新）
-  // 设置默认相机参数（sentry相机参数）
-  camera_matrix_ = (cv::Mat_<double>(3, 3) << 
-    2009.95354, 0.0, 661.80486,
-    0.0, 2015.28995, 541.61636,
-    0.0, 0.0, 1.0);
-  distort_coeffs_ = (cv::Mat_<double>(1, 5) << 
-    -0.086832, 0.404938, 0.001267, 0.001916, 0.0);
-  
-  FYT_INFO("armor_solver", "Camera parameters initialized with default values (will be updated from camera_info)");
+  // 反投影相关 - 初始化相机参数 (已注释)
+  // camera_matrix_ = (cv::Mat_<double>(3, 3) <<
+  //   2009.95354, 0.0, 661.80486,
+  //   0.0, 2015.28995, 541.61636,
+  //   0.0, 0.0, 1.0);
+  // distort_coeffs_ = (cv::Mat_<double>(1, 5) <<
+  //   -0.086832, 0.404938, 0.001267, 0.001916, 0.0);
+  // FYT_INFO("armor_solver", "Camera parameters initialized with default values (will be updated from camera_info)");
 
   node.reset();
 }
 
-// 设置相机参数（从camera_info消息）
-void Solver::setCameraParameters(const sensor_msgs::msg::CameraInfo::SharedPtr camera_info) {
-  if (!camera_info) {
-    FYT_WARN("armor_solver", "Camera info is nullptr, cannot update camera parameters");
-    return;
-  }
-  
-  // 从camera_info消息中提取相机内参矩阵
-  const auto &K = camera_info->k;
-  camera_matrix_ = (cv::Mat_<double>(3, 3) << 
-    K[0], K[1], K[2],
-    K[3], K[4], K[5],
-    K[6], K[7], K[8]);
-  
-  // 从camera_info消息中提取畸变系数
-  const auto &D = camera_info->d;
-  if (D.size() >= 5) {
-    distort_coeffs_ = (cv::Mat_<double>(1, 5) << 
-      D[0], D[1], D[2], D[3], D[4]);
-  } else {
-    // 如果畸变系数不足5个，用0填充
-    distort_coeffs_ = cv::Mat::zeros(1, 5, CV_64F);
-    for (size_t i = 0; i < D.size() && i < 5; ++i) {
-      distort_coeffs_.at<double>(0, i) = D[i];
-    }
-  }
-  
-  FYT_INFO("armor_solver", "Camera parameters updated from camera_info: fx={:.2f}, fy={:.2f}, cx={:.2f}, cy={:.2f}", 
-           camera_matrix_.at<double>(0, 0), camera_matrix_.at<double>(1, 1),
-           camera_matrix_.at<double>(0, 2), camera_matrix_.at<double>(1, 2));
-}
+// 反投影相关 - 设置相机参数 (已注释)
+// void Solver::setCameraParameters(const sensor_msgs::msg::CameraInfo::SharedPtr camera_info) {
+//   if (!camera_info) {
+//     FYT_WARN("armor_solver", "Camera info is nullptr, cannot update camera parameters");
+//     return;
+//   }
+//   const auto &K = camera_info->k;
+//   camera_matrix_ = (cv::Mat_<double>(3, 3) <<
+//     K[0], K[1], K[2],
+//     K[3], K[4], K[5],
+//     K[6], K[7], K[8]);
+//   const auto &D = camera_info->d;
+//   if (D.size() >= 5) {
+//     distort_coeffs_ = (cv::Mat_<double>(1, 5) <<
+//       D[0], D[1], D[2], D[3], D[4]);
+//   } else {
+//     distort_coeffs_ = cv::Mat::zeros(1, 5, CV_64F);
+//     for (size_t i = 0; i < D.size() && i < 5; ++i) {
+//       distort_coeffs_.at<double>(0, i) = D[i];
+//     }
+//   }
+//   FYT_INFO("armor_solver", "Camera parameters updated from camera_info: fx={:.2f}, fy={:.2f}, cx={:.2f}, cy={:.2f}",
+//            camera_matrix_.at<double>(0, 0), camera_matrix_.at<double>(1, 1),
+//            camera_matrix_.at<double>(0, 2), camera_matrix_.at<double>(1, 2));
+// }
 
 rm_interfaces::msg::GimbalCmd Solver::solve(const rm_interfaces::msg::Target &target,
                                             const rclcpp::Time &current_time,
@@ -426,96 +418,78 @@ std::vector<std::pair<double, double>> Solver::getTrajectory() const noexcept {
   return trajectory;
 }
 
-std::vector<cv::Point2f> Solver::reproject_single_armor(const Eigen::Vector3d &xyz_in_world,
-                                                        double yaw, 
-                                                        double pitch,
-                                                        ArmorType type,
-                                                        const std::string &target_frame,
-                                                        std::shared_ptr<tf2_ros::Buffer> tf2_buffer) const noexcept {
-  // 构造装甲板的旋转矩阵
-  auto sin_yaw = std::sin(yaw);
-  auto cos_yaw = std::cos(yaw);
-  auto sin_pitch = std::sin(pitch);
-  auto cos_pitch = std::cos(pitch);
-  
-  // clang-format off
-  const Eigen::Matrix3d R_armor2world {
-    {cos_yaw * cos_pitch, -sin_yaw, cos_yaw * sin_pitch},
-    {sin_yaw * cos_pitch,  cos_yaw, sin_yaw * sin_pitch},
-    {         -sin_pitch,        0,           cos_pitch}
-  };
-  // clang-format on
+// 反投影相关 - reproject_single_armor (已注释)
+// std::vector<cv::Point2f> Solver::reproject_single_armor(const Eigen::Vector3d &xyz_in_world,
+//                                                         double yaw,
+//                                                         double pitch,
+//                                                         ArmorType type,
+//                                                         const std::string &target_frame,
+//                                                         std::shared_ptr<tf2_ros::Buffer> tf2_buffer) const noexcept {
+//   auto sin_yaw = std::sin(yaw);
+//   auto cos_yaw = std::cos(yaw);
+//   auto sin_pitch = std::sin(pitch);
+//   auto cos_pitch = std::cos(pitch);
+//   const Eigen::Matrix3d R_armor2world {
+//     {cos_yaw * cos_pitch, -sin_yaw, cos_yaw * sin_pitch},
+//     {sin_yaw * cos_pitch,  cos_yaw, sin_yaw * sin_pitch},
+//     {         -sin_pitch,        0,           cos_pitch}
+//   };
+//   Eigen::Matrix3d R_camera2gimbal;
+//   Eigen::Vector3d t_camera2gimbal;
+//   try {
+//     geometry_msgs::msg::TransformStamped tf_camera2gimbal =
+//       tf2_buffer->lookupTransform("gimbal_link", "camera_link", tf2::TimePointZero);
+//     auto msg_q = tf_camera2gimbal.transform.rotation;
+//     tf2::Quaternion tf_q;
+//     tf2::fromMsg(msg_q, tf_q);
+//     tf2::Matrix3x3 mat(tf_q);
+//     for (int i = 0; i < 3; ++i) {
+//       for (int j = 0; j < 3; ++j) {
+//         R_camera2gimbal(i, j) = mat[i][j];
+//       }
+//     }
+//     t_camera2gimbal << tf_camera2gimbal.transform.translation.x,
+//                        tf_camera2gimbal.transform.translation.y,
+//                        tf_camera2gimbal.transform.translation.z;
+//   } catch (tf2::TransformException &ex) {
+//     FYT_ERROR("armor_solver", "TF lookup failed in reproject_single_armor: {}", ex.what());
+//     return std::vector<cv::Point2f>();
+//   }
+//   Eigen::Matrix3d R_gimbal2world;
+//   try {
+//     geometry_msgs::msg::TransformStamped tf_gimbal2world =
+//       tf2_buffer->lookupTransform(target_frame, "gimbal_link", tf2::TimePointZero);
+//     auto msg_q_gimbal = tf_gimbal2world.transform.rotation;
+//     tf2::Quaternion tf_q_gimbal;
+//     tf2::fromMsg(msg_q_gimbal, tf_q_gimbal);
+//     tf2::Matrix3x3 mat_gimbal(tf_q_gimbal);
+//     for (int i = 0; i < 3; ++i) {
+//       for (int j = 0; j < 3; ++j) {
+//         R_gimbal2world(i, j) = mat_gimbal[i][j];
+//       }
+//     }
+//   } catch (tf2::TransformException &ex) {
+//     FYT_ERROR("armor_solver", "TF lookup failed for gimbal2world (frame: {}): {}", target_frame, ex.what());
+//     return std::vector<cv::Point2f>();
+//   }
+//   const Eigen::Vector3d &t_armor2world = xyz_in_world;
+//   Eigen::Matrix3d R_armor2camera =
+//     R_camera2gimbal.transpose() * R_gimbal2world.transpose() * R_armor2world;
+//   Eigen::Vector3d t_armor2camera =
+//     R_camera2gimbal.transpose() * (R_gimbal2world.transpose() * t_armor2world - t_camera2gimbal);
+//   cv::Vec3d rvec;
+//   cv::Mat R_armor2camera_cv;
+//   cv::eigen2cv(R_armor2camera, R_armor2camera_cv);
+//   cv::Rodrigues(R_armor2camera_cv, rvec);
+//   cv::Vec3d tvec(t_armor2camera[0], t_armor2camera[1], t_armor2camera[2]);
+//   const auto & object_points = (type == ArmorType::BIG) ? BIG_ARMOR_POINTS : SMALL_ARMOR_POINTS;
+//   std::vector<cv::Point2f> image_points;
+//   cv::projectPoints(object_points, rvec, tvec, camera_matrix_, distort_coeffs_, image_points);
+//   return image_points;
+// }
 
-  // 获取相机到云台的变换
-  Eigen::Matrix3d R_camera2gimbal;
-  Eigen::Vector3d t_camera2gimbal;
-  
-  try {
-    geometry_msgs::msg::TransformStamped tf_camera2gimbal =
-      tf2_buffer->lookupTransform("gimbal_link", "camera_link", tf2::TimePointZero);
-    auto msg_q = tf_camera2gimbal.transform.rotation;
-    tf2::Quaternion tf_q;
-    tf2::fromMsg(msg_q, tf_q);
-    tf2::Matrix3x3 mat(tf_q);
-
-    for (int i = 0; i < 3; ++i) {
-      for (int j = 0; j < 3; ++j) {
-        R_camera2gimbal(i, j) = mat[i][j];
-      }
-    }
-    
-    t_camera2gimbal << tf_camera2gimbal.transform.translation.x,
-                       tf_camera2gimbal.transform.translation.y,
-                       tf_camera2gimbal.transform.translation.z;
-  } catch (tf2::TransformException &ex) {
-    FYT_ERROR("armor_solver", "TF lookup failed in reproject_single_armor: {}", ex.what());
-    return std::vector<cv::Point2f>();
-  }
-
-  // 获取云台到世界坐标系的变换（使用target_frame）
-  Eigen::Matrix3d R_gimbal2world;
-  try {
-    geometry_msgs::msg::TransformStamped tf_gimbal2world =
-      tf2_buffer->lookupTransform(target_frame, "gimbal_link", tf2::TimePointZero);
-    auto msg_q_gimbal = tf_gimbal2world.transform.rotation;
-    tf2::Quaternion tf_q_gimbal;
-    tf2::fromMsg(msg_q_gimbal, tf_q_gimbal);
-    tf2::Matrix3x3 mat_gimbal(tf_q_gimbal);
-
-    for (int i = 0; i < 3; ++i) {
-      for (int j = 0; j < 3; ++j) {
-        R_gimbal2world(i, j) = mat_gimbal[i][j];
-      }
-    }
-  } catch (tf2::TransformException &ex) {
-    FYT_ERROR("armor_solver", "TF lookup failed for gimbal2world (frame: {}): {}", target_frame, ex.what());
-    return std::vector<cv::Point2f>();
-  }
-
-  // 计算装甲板到相机的变换
-  const Eigen::Vector3d &t_armor2world = xyz_in_world;
-  Eigen::Matrix3d R_armor2camera =
-    R_camera2gimbal.transpose() * R_gimbal2world.transpose() * R_armor2world;
-  Eigen::Vector3d t_armor2camera =
-    R_camera2gimbal.transpose() * (R_gimbal2world.transpose() * t_armor2world - t_camera2gimbal);
-
-  // 转换为 OpenCV 格式
-  cv::Vec3d rvec;
-  cv::Mat R_armor2camera_cv;
-  cv::eigen2cv(R_armor2camera, R_armor2camera_cv);
-  cv::Rodrigues(R_armor2camera_cv, rvec);
-  cv::Vec3d tvec(t_armor2camera[0], t_armor2camera[1], t_armor2camera[2]);
-
-  // 选择装甲板模型点
-  const auto & object_points = (type == ArmorType::BIG) ? BIG_ARMOR_POINTS : SMALL_ARMOR_POINTS;
-  
-  // 执行反投影
-  std::vector<cv::Point2f> image_points;
-  cv::projectPoints(object_points, rvec, tvec, camera_matrix_, distort_coeffs_, image_points);
-  
-  return image_points;
-}
-
+// 反投影相关 - reproject_all_armors (已注释)
+#if 0
 std::vector<std::vector<cv::Point2f>> Solver::reproject_all_armors(const rm_interfaces::msg::Target &target,
                                                                   std::shared_ptr<tf2_ros::Buffer> tf2_buffer) const noexcept {
   std::vector<std::vector<cv::Point2f>> all_reprojected_armors;
@@ -565,17 +539,16 @@ std::vector<std::vector<cv::Point2f>> Solver::reproject_all_armors(const rm_inte
     armor4.yaw = target_yaw + M_PI;
     temp_armors_data.push_back(armor4);
 
-    // 为每个装甲板执行反投影
-    for (const auto &armor : temp_armors_data) {
-      Eigen::Vector3d armor_pos(armor.x, armor.y, armor.z);
-      ArmorType type = ArmorType::SMALL; // 根据实际情况调整，这里先用SMALL
-      double pitch = 15.0 * M_PI / 180.0; // 普通装甲板pitch角
-      
-      auto reprojected_points = reproject_single_armor(armor_pos, armor.yaw, pitch, type, target.header.frame_id, tf2_buffer);
-      if (!reprojected_points.empty()) {
-        all_reprojected_armors.push_back(reprojected_points);
-      }
-    }
+    // 为每个装甲板执行反投影 (已注释)
+    // for (const auto &armor : temp_armors_data) {
+    //   Eigen::Vector3d armor_pos(armor.x, armor.y, armor.z);
+    //   ArmorType type = ArmorType::SMALL;
+    //   double pitch = 15.0 * M_PI / 180.0;
+    //   auto reprojected_points = reproject_single_armor(armor_pos, armor.yaw, pitch, type, target.header.frame_id, tf2_buffer);
+    //   if (!reprojected_points.empty()) {
+    //     all_reprojected_armors.push_back(reprojected_points);
+    //   }
+    // }
     
   } else if (target.armors_num == 3) {
     // 三块装甲板 (前哨站)
@@ -593,7 +566,7 @@ std::vector<std::vector<cv::Point2f>> Solver::reproject_all_armors(const rm_inte
     ArmorData armor2;
     armor2.x = target_position.x() - target.radius_1 * cos(target_yaw + M_PI*2/3);
     armor2.y = target_position.y() - target.radius_1 * sin(target_yaw + M_PI*2/3);
-    armor2.z = target_position.z() + target.d_zc;
+    armor2.z = target_position.z() + 0.1 + target.d_zc;
     armor2.yaw = target_yaw + M_PI*2/3;
     temp_armors_data.push_back(armor2);
 
@@ -601,47 +574,43 @@ std::vector<std::vector<cv::Point2f>> Solver::reproject_all_armors(const rm_inte
     ArmorData armor3;
     armor3.x = target_position.x() - target.radius_1 * cos(target_yaw - M_PI*2/3);
     armor3.y = target_position.y() - target.radius_1 * sin(target_yaw - M_PI*2/3);
-    armor3.z = target_position.z() + target.d_zc;
+    armor3.z = target_position.z()+ 0.2 + target.d_zc;
     armor3.yaw = target_yaw - M_PI*2/3;
     temp_armors_data.push_back(armor3);
 
-    // 为每个装甲板执行反投影
-    for (const auto &armor : temp_armors_data) {
-      Eigen::Vector3d armor_pos(armor.x, armor.y, armor.z);
-      ArmorType type = ArmorType::BIG; // 前哨站通常是大装甲板
-      double pitch = -15.0 * M_PI / 180.0; // 前哨站特殊pitch角
-      
-      auto reprojected_points = reproject_single_armor(armor_pos, armor.yaw, pitch, type, target.header.frame_id, tf2_buffer);
-      if (!reprojected_points.empty()) {
-        all_reprojected_armors.push_back(reprojected_points);
-      }
-    }
+    // 为每个装甲板执行反投影 (已注释)
+    // for (const auto &armor : temp_armors_data) {
+    //   Eigen::Vector3d armor_pos(armor.x, armor.y, armor.z);
+    //   ArmorType type = ArmorType::BIG;
+    //   double pitch = -15.0 * M_PI / 180.0;
+    //   auto reprojected_points = reproject_single_armor(armor_pos, armor.yaw, pitch, type, target.header.frame_id, tf2_buffer);
+    //   if (!reprojected_points.empty()) {
+    //     all_reprojected_armors.push_back(reprojected_points);
+    //   }
+    // }
   }
 
   return all_reprojected_armors;
 }
 
-double Solver::calculate_reprojection_error(const std::vector<cv::Point2f> &detected_points,
-                                           const std::vector<cv::Point2f> &reprojected_points) const noexcept {
-  if (detected_points.size() != reprojected_points.size() || detected_points.empty()) {
-    return std::numeric_limits<double>::max();
-  }
+// double Solver::calculate_reprojection_error(const std::vector<cv::Point2f> &detected_points,
+//                                            const std::vector<cv::Point2f> &reprojected_points) const noexcept {
+//   if (detected_points.size() != reprojected_points.size() || detected_points.empty()) {
+//     return std::numeric_limits<double>::max();
+//   }
+//   double total_error = 0.0;
+//   for (size_t i = 0; i < detected_points.size(); ++i) {
+//     total_error += cv::norm(detected_points[i] - reprojected_points[i]);
+//   }
+//   return total_error / detected_points.size();
+// }
 
-  double total_error = 0.0;
-  for (size_t i = 0; i < detected_points.size(); ++i) {
-    total_error += cv::norm(detected_points[i] - reprojected_points[i]);
-  }
-  
-  return total_error / detected_points.size(); // 返回平均误差
-}
-
-double Solver::outpost_reprojection_error(const std::vector<cv::Point2f> &armor_points, 
-                                         ArmorType type, 
-                                         const double & pitch, 
-                                         const Eigen::Vector3d &xyz_in_world) const noexcept {
-  // 这个函数暂时不实现，因为calculate_reprojection_error已经提供了类似功能
-  // 如果需要，可以使用solvePnP来估计姿态，然后计算反投影误差
-  return 0.0;
-}
+// double Solver::outpost_reprojection_error(const std::vector<cv::Point2f> &armor_points,
+//                                          ArmorType type,
+//                                          const double & pitch,
+//                                          const Eigen::Vector3d &xyz_in_world) const noexcept {
+//   return 0.0;
+// }
+#endif
 
 }  // namespace fyt::auto_aim

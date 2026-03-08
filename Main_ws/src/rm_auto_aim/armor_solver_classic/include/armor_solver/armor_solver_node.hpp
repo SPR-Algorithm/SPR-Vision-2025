@@ -35,7 +35,6 @@
 #include <image_transport/image_transport.hpp>
 #include <cv_bridge/cv_bridge.h>
 #include <opencv2/opencv.hpp>
-#include <Eigen/Dense>
 // std
 #include <memory>
 #include <string>
@@ -119,33 +118,21 @@ private:
   visualization_msgs::msg::Marker selection_marker_;
   rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr marker_pub_;
   
-  // 相机信息订阅
-  rclcpp::Subscription<sensor_msgs::msg::CameraInfo>::SharedPtr cam_info_sub_;
-  sensor_msgs::msg::CameraInfo::SharedPtr latest_camera_info_;
-  
-  // 图像订阅（用于反投影可视化）
-  rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_sub_;
-  sensor_msgs::msg::Image::SharedPtr latest_image_;
-  
-  // 反投影可视化
-  bool enable_reprojection_visualization_;
-  std::unique_ptr<image_transport::ImageTransport> image_transport_;
-  image_transport::Publisher reprojection_img_pub_;
-  
-  // 相机信息回调
-  void cameraInfoCallback(const sensor_msgs::msg::CameraInfo::SharedPtr camera_info);
-  
-  // 图像回调
-  void imageCallback(const sensor_msgs::msg::Image::SharedPtr image_msg);
-  
-  // 发布反投影图像
-  void publishReprojectionImage(const rm_interfaces::msg::Target &target_msg,
-                               const rm_interfaces::msg::Armors::SharedPtr armors_ptr);
-  
-  // 绘制反投影装甲板
-  void drawReprojectedArmors(cv::Mat &image, 
-                           const std::vector<std::vector<cv::Point2f>> &reprojected_armors,
-                           const rm_interfaces::msg::Armors::SharedPtr armors_ptr);
+  // 反投影相关 (已注释)
+  // rclcpp::Subscription<sensor_msgs::msg::CameraInfo>::SharedPtr cam_info_sub_;
+  // sensor_msgs::msg::CameraInfo::SharedPtr latest_camera_info_;
+  // rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr image_sub_;
+  // sensor_msgs::msg::Image::SharedPtr latest_image_;
+  // bool enable_reprojection_visualization_;
+  // std::unique_ptr<image_transport::ImageTransport> image_transport_;
+  // image_transport::Publisher reprojection_img_pub_;
+  // void cameraInfoCallback(const sensor_msgs::msg::CameraInfo::SharedPtr camera_info);
+  // void imageCallback(const sensor_msgs::msg::Image::SharedPtr image_msg);
+  // void publishReprojectionImage(const rm_interfaces::msg::Target &target_msg,
+  //                              const rm_interfaces::msg::Armors::SharedPtr armors_ptr);
+  // void drawReprojectedArmors(cv::Mat &image,
+  //                          const std::vector<std::vector<cv::Point2f>> &reprojected_armors,
+  //                          const rm_interfaces::msg::Armors::SharedPtr armors_ptr);
 };
 
 }  // namespace fyt::auto_aim
