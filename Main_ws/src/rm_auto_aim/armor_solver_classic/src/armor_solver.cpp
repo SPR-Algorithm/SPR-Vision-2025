@@ -26,11 +26,6 @@
 #include "rm_utils/math/utils.hpp"
 
 namespace fyt::auto_aim {
-constexpr double LIGHTBAR_LENGTH = 56e-3;     // m
-constexpr double BIG_ARMOR_WIDTH = 230e-3;    // m
-constexpr double SMALL_ARMOR_WIDTH = 135e-3;  // m
-
-
 Solver::Solver(std::weak_ptr<rclcpp::Node> n) : node_(n) {
   auto node = node_.lock();
 

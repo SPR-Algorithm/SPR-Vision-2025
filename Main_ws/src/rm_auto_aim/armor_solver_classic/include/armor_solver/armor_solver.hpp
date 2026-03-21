@@ -144,15 +144,6 @@ private:
   double side_angle_;
   double min_switching_v_yaw_;
 
-  // // 变换所需矩阵
-  // Eigen::Matrix3d R_camera2gimbal_;
-  // Eigen::Matrix3d R_gimbal2world_;
-  // Eigen::Vector3d t_camera2gimbal_;
-  
-  // 相机参数 (用于反投影) (已注释)
-  // cv::Mat camera_matrix_;
-  // cv::Mat distort_coeffs_;
-
   std::weak_ptr<rclcpp::Node> node_;
 };
 }  // namespace fyt::auto_aim
