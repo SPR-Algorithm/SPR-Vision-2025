@@ -26,6 +26,7 @@
 #include "armor_solver/motion_model.hpp"
 #include "rm_utils/common.hpp"
 #include "rm_utils/heartbeat.hpp"
+#include <cv_bridge/cv_bridge.h>
 
 namespace fyt::auto_aim {
 //last cmd data
@@ -177,6 +178,24 @@ ArmorSolverNode::ArmorSolverNode(const rclcpp::NodeOptions &options)
     initMarkers();
   }
 
+  // 反投影可视化初始化 (已注释)
+  // enable_reprojection_visualization_ = this->declare_parameter("enable_reprojection_visualization", true);
+  // if (enable_reprojection_visualization_) {
+  //   image_transport_ = std::make_unique<image_transport::ImageTransport>(this->shared_from_this());
+  //   reprojection_img_pub_ = image_transport_->advertise("armor_solver/reprojection_image", 1);
+  //   cam_info_sub_ = this->create_subscription<sensor_msgs::msg::CameraInfo>(
+  //     "camera_info", 10,
+  //     [this](const sensor_msgs::msg::CameraInfo::SharedPtr msg) {
+  //       this->cameraInfoCallback(msg);
+  //     });
+  //   image_sub_ = this->create_subscription<sensor_msgs::msg::Image>(
+  //     "image_raw", 10,
+  //     [this](const sensor_msgs::msg::Image::SharedPtr msg) {
+  //       this->imageCallback(msg);
+  //     });
+  //   FYT_INFO("armor_solver", "Reprojection visualization enabled!");
+  // }
+
   // Heartbeat
   heartbeat_ = HeartBeatPublisher::create(this);
 }
@@ -286,24 +305,12 @@ void ArmorSolverNode::initMarkers() noexcept {
 
 void ArmorSolverNode::armorsCallback(const rm_interfaces::msg::Armors::SharedPtr armors_msg) {
   
-  //std::cout<<"start  solver"<<std::endl;
-  // Lazy initialize solver owing to weak_from_this() can't be called in constructor
   if (solver_ == nullptr) {
     solver_ = std::make_unique<Solver>(weak_from_this());
   }
 
-  // Tranform armor position from image frame to world coordinate
-  for (auto &armor : armors_msg->armors) {
-    geometry_msgs::msg::PoseStamped ps;
-    ps.header = armors_msg->header;
-    ps.pose = armor.pose;
-    try {
-      armor.pose = tf2_buffer_->transform(ps, target_frame_).pose;
-    } catch (const tf2::TransformException &ex) {
-      FYT_ERROR("armor_solver", "Transform error: {}", ex.what());
-      return;
-    }
-  }
+  // 实现装甲板位置从云台坐标系转换到世界坐标系的增强功能
+  transformArmorsToWorldCoordinates(armors_msg);
 
   // Filter abnormal armors
   armors_msg->armors.erase(std::remove_if(armors_msg->armors.begin(),
@@ -329,11 +336,8 @@ void ArmorSolverNode::armorsCallback(const rm_interfaces::msg::Armors::SharedPtr
     dt_ = (time - last_time_).seconds();
     tracker_->lost_thres = std::abs(static_cast<int>(lost_time_thres_ / dt_));
 
-    if (tracker_->tracked_id == "outpost") {
-      tracker_->ekf->setPredictFunc(Predict{dt_, MotionModel::CONSTANT_VEL_ROT});
-    } else {
-      tracker_->ekf->setPredictFunc(Predict{dt_, MotionModel::CONSTANT_VEL_ROT});
-    }
+    // 设置预测函数（前哨站和其他机器人使用相同的运动模型）
+    tracker_->ekf->setPredictFunc(Predict{dt_, MotionModel::CONSTANT_VEL_ROT});
     tracker_->update(armors_msg);
     // Publish measurement
     measure_msg.x = tracker_->measurement(0);
@@ -371,6 +375,7 @@ void ArmorSolverNode::armorsCallback(const rm_interfaces::msg::Armors::SharedPtr
   // Store and Publish the target_msg
   armor_target_ = target_msg;
   target_pub_->publish(target_msg);
+
 
   last_time_ = time;
 }
@@ -510,6 +515,48 @@ void ArmorSolverNode::setModeCallback(
 
   FYT_WARN("armor_solver", "Set Mode to {}", visionModeToString(mode));
 }
+
+// 实现装甲板位置从云台坐标系转换到世界坐标系
+void ArmorSolverNode::transformArmorsToWorldCoordinates(
+    const rm_interfaces::msg::Armors::SharedPtr &armors_msg) {
+  
+  for (auto &armor : armors_msg->armors) {
+    // Step 1: 准备姿态数据用于变换
+    geometry_msgs::msg::PoseStamped ps;
+    ps.header = armors_msg->header;
+    ps.pose = armor.pose;
+    
+    try {
+      // Step 2: 从相机坐标系变换到目标坐标系(通常是odom/world)
+      geometry_msgs::msg::PoseStamped transformed_pose = tf2_buffer_->transform(ps, target_frame_);
+      armor.pose = transformed_pose.pose;
+      
+      // Step 3: 获取云台到世界坐标系的变换 (用于后续处理)
+      geometry_msgs::msg::TransformStamped gimbal_to_world_tf;
+      try {
+        gimbal_to_world_tf = tf2_buffer_->lookupTransform(
+          target_frame_, "gimbal_link", armors_msg->header.stamp);
+        
+        // 验证变换结果 - 记录坐标变换信息
+        if (debug_mode_) {
+          FYT_DEBUG("armor_solver", "Armor {} transformed - World pos: x={:.3f}, y={:.3f}, z={:.3f}", 
+                   armor.number,
+                   armor.pose.position.x,
+                   armor.pose.position.y,
+                   armor.pose.position.z);
+        }
+        
+      } catch (const tf2::TransformException &ex) {
+        FYT_WARN("armor_solver", "Could not get gimbal to world transform: {}", ex.what());
+      }
+      
+    } catch (const tf2::TransformException &ex) {
+      FYT_ERROR("armor_solver", "Transform error from camera to {}: {}", target_frame_, ex.what());
+      return;
+    }
+  }
+}
+
 
 }  // namespace fyt::auto_aim
 

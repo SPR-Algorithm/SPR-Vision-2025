@@ -19,14 +19,17 @@
 
 // std
 #include <memory>
+#include <vector>
 // ros2
 #include <tf2_ros/buffer.h>
 #include <angles/angles.h>
-
 #include <rclcpp/time.hpp>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
+#include <sensor_msgs/msg/camera_info.hpp>
 // 3rd party
 #include <Eigen/Dense>
+#include <opencv2/opencv.hpp>
+#include <opencv2/core/eigen.hpp>
 // project
 #include "rm_interfaces/msg/gimbal_cmd.hpp"
 #include "rm_interfaces/msg/target.hpp"
@@ -34,6 +37,12 @@
 #include "rm_utils/math/manual_compensator.hpp"
 
 namespace fyt::auto_aim {
+
+// 装甲板类型枚举
+enum class ArmorType {
+  SMALL = 0,
+  BIG = 1
+};
 // Solver class used to solve the gimbal command from tracked target
 class Solver {
 public:
@@ -49,7 +58,31 @@ public:
 
   enum State { TRACKING_ARMOR = 0, TRACKING_CENTER = 1 } state;
 
-  std::vector<std::pair<double, double>> getTrajectory() const noexcept; 
+  std::vector<std::pair<double, double>> getTrajectory() const noexcept;
+  void set_R_gimbal2world(const Eigen::Quaterniond & q);
+  
+  // 反投影功能 (已注释)
+  // double outpost_reprojection_error(const std::vector<cv::Point2f> &armor_points,
+  //                                  ArmorType type,
+  //                                  const double & pitch,
+  //                                  const Eigen::Vector3d &xyz_in_world) const noexcept;
+  //
+  // // 新增反投影功能
+  // std::vector<cv::Point2f> reproject_single_armor(const Eigen::Vector3d &xyz_in_world,
+  //                                                 double yaw,
+  //                                                 double pitch,
+  //                                                 ArmorType type,
+  //                                                 const std::string &target_frame,
+  //                                                 std::shared_ptr<tf2_ros::Buffer> tf2_buffer) const noexcept;
+  //
+  // std::vector<std::vector<cv::Point2f>> reproject_all_armors(const rm_interfaces::msg::Target &target,
+  //                                                           std::shared_ptr<tf2_ros::Buffer> tf2_buffer) const noexcept;
+  //
+  // double calculate_reprojection_error(const std::vector<cv::Point2f> &detected_points,
+  //                                    const std::vector<cv::Point2f> &reprojected_points) const noexcept;
+  //
+  // // 设置相机参数（从camera_info消息）
+  // void setCameraParameters(const sensor_msgs::msg::CameraInfo::SharedPtr camera_info);
 
   //定义一个储存装甲板xyz和yaw的结构体
   struct ArmorData {
@@ -110,6 +143,15 @@ private:
 
   double side_angle_;
   double min_switching_v_yaw_;
+
+  // // 变换所需矩阵
+  // Eigen::Matrix3d R_camera2gimbal_;
+  // Eigen::Matrix3d R_gimbal2world_;
+  // Eigen::Vector3d t_camera2gimbal_;
+  
+  // 相机参数 (用于反投影) (已注释)
+  // cv::Mat camera_matrix_;
+  // cv::Mat distort_coeffs_;
 
   std::weak_ptr<rclcpp::Node> node_;
 };

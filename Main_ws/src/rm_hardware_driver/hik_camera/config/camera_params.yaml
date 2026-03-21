@@ -2,5 +2,9 @@
   ros__parameters:
     camera_name: narrow_stereo
 
-    exposure_time: 5000
+    exposure_time: 3000
     gain: 16.0
+
+    # 图像翻转 (安装方向导致需要翻转时可开启)
+    flip_horizontal: false
+    flip_vertical: false

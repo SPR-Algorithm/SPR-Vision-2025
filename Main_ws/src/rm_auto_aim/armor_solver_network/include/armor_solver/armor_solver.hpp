@@ -112,6 +112,7 @@ private:
   double angular_velocity_factor_;
   double velocity_factor_; // 用于修正目标位置预测的速度系数
   std::weak_ptr<rclcpp::Node> node_;
+
 };
 }  // namespace fyt::auto_aim
 #endif  // ARMOR_SOLVER_SOLVER_HPP_

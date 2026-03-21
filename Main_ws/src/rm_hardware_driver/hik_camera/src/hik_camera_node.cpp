@@ -1,7 +1,9 @@
 #include "MvCameraControl.h"
 // ROS
 #include <camera_info_manager/camera_info_manager.hpp>
+#include <cv_bridge/cv_bridge.h>
 #include <image_transport/image_transport.hpp>
+#include <opencv2/imgproc.hpp>
 #include <rclcpp/logging.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp/utilities.hpp>
@@ -45,6 +47,11 @@ public:
     bool use_sensor_data_qos = this->declare_parameter("use_sensor_data_qos", false);
     auto qos = use_sensor_data_qos ? rmw_qos_profile_sensor_data : rmw_qos_profile_default;
     camera_pub_ = image_transport::create_camera_publisher(this, "image_raw", qos);
+
+    flip_horizontal_ = this->declare_parameter("flip_horizontal", false);
+    flip_vertical_ = this->declare_parameter("flip_vertical", false);
+    RCLCPP_INFO(this->get_logger(), "Image flip: horizontal=%s, vertical=%s",
+      flip_horizontal_ ? "true" : "false", flip_vertical_ ? "true" : "false");
 
     declareParameters();
 
@@ -90,6 +97,17 @@ public:
           image_msg_.width = out_frame.stFrameInfo.nWidth;
           image_msg_.step = out_frame.stFrameInfo.nWidth * 3;
           image_msg_.data.resize(image_msg_.width * image_msg_.height * 3);
+
+          if (flip_horizontal_ || flip_vertical_) {
+            int flip_code = (flip_horizontal_ && flip_vertical_) ? -1 :
+                           flip_horizontal_ ? 1 : 0;
+            cv_bridge::CvImagePtr cv_ptr =
+              cv_bridge::toCvCopy(image_msg_, sensor_msgs::image_encodings::RGB8);
+            cv::flip(cv_ptr->image, cv_ptr->image, flip_code);
+            auto flipped_msg = cv_ptr->toImageMsg();
+            flipped_msg->header = image_msg_.header;
+            image_msg_ = *flipped_msg;
+          }
 
           camera_info_msg_.header = image_msg_.header;
           camera_pub_.publish(image_msg_, camera_info_msg_);
@@ -168,6 +186,10 @@ private:
           result.successful = false;
           result.reason = "Failed to set gain, status = " + std::to_string(status);
         }
+      } else if (param.get_name() == "flip_horizontal") {
+        flip_horizontal_ = param.as_bool();
+      } else if (param.get_name() == "flip_vertical") {
+        flip_vertical_ = param.as_bool();
       } else {
         result.successful = false;
         result.reason = "Unknown parameter: " + param.get_name();
@@ -192,6 +214,9 @@ private:
 
   int fail_conut_ = 0;
   std::thread capture_thread_;
+
+  bool flip_horizontal_ = false;
+  bool flip_vertical_ = false;
 
   OnSetParametersCallbackHandle::SharedPtr params_callback_handle_;
 };

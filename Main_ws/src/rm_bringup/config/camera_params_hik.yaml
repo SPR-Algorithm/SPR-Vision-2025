@@ -1,6 +1,10 @@
 /camera_node:
   ros__parameters:
     camera_info_url: package://rm_bringup/config/camera_info.yaml
-    exposure_time: 3000
-    gain: 16.0
+    exposure_time: 2000
+    gain: 5.0
+
+    # 图像翻转 (安装方向导致需要翻转时可开启)
+    flip_horizontal: false
+    flip_vertical: false
 

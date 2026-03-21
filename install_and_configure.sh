@@ -84,7 +84,8 @@ cd ..
 echo "[CH341驱动安装完成]"
 
 echo "[开始添加udev规则]"
-sudo cp ./rules/camera.rules /etc/udev/rules.d/
+sudo cp ./rules/camera_mv.rules /etc/udev/rules.d/
+sudo cp ./rules/camera_hik.rules /etc/udev/rules.d/
 sudo cp ./rules/serial.rules /etc/udev/rules.d/
 sudo udevadm control --reload-rules && sudo udevadm trigger
 echo "[udev规则添加完成]"

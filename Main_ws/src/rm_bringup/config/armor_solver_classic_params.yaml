@@ -3,16 +3,17 @@
     debug: true
     target_frame: odom
     max_armor_distance: 10.0
-
+    enable_reprojection_visualization: true
+    
     ekf:
-      sigma2_q_x_max: 1.5
-      sigma2_q_y_max: 1.5
-      sigma2_q_z_max: 1.5
+      sigma2_q_x_max: 0.25
+      sigma2_q_y_max: 0.25
+      sigma2_q_z_max: 0.20
       sigma2_q_yaw_max: 5.0
 
-      sigma2_q_x_min: 0.5
-      sigma2_q_y_min: 0.5
-      sigma2_q_z_min: 0.5
+      sigma2_q_x_min: 0.06
+      sigma2_q_y_min: 0.06
+      sigma2_q_z_min: 0.06
       sigma2_q_yaw_min: 3.0
       
       sigma2_q_r: 80.0
@@ -30,12 +31,12 @@
       lost_time_thres: 0.5
     
     solver:
-      shooting_range_width: 0.3 # 射击范围宽度
+      shooting_range_width: 0.2 # 射击范围宽度
       shooting_range_height: 0.3 # 射击范围高度
       prediction_delay: 0.05
       controller_delay: 0.0
       max_tracking_v_yaw: 60.0 #转速(rad/s)大于这个值时瞄准机器人中心 
-      side_angle: 20.0 
+      side_angle: 13.0 
       bullet_speed: 23.0
       compenstator_type: "ideal"
       gravity: 10.0
@@ -48,6 +49,8 @@
       angle_offset: [
         "0.0 0.0 0.0 0.0 0.0 0.0",
       ]
+
+    
 
 
 

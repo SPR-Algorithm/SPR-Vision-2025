@@ -14,3 +14,4 @@ utils/libs/spdlog-1.14.0
 utils/CH341SER_LINUX
 GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
 fishros
+.DS_Store

@@ -54,7 +54,7 @@ OpenVINODetectNode::OpenVINODetectNode(rclcpp::NodeOptions options)
   param_desc.integer_range[0].from_value = 0;
   param_desc.integer_range[0].to_value = 1;
   detect_color_ = this->declare_parameter("detect_color", 1, param_desc);
-
+  // qos?
   auto use_sensor_data_qos = this->declare_parameter("use_sensor_data_qos", false);
 
 
@@ -163,6 +163,7 @@ void OpenVINODetectNode::img_callback(const sensor_msgs::msg::Image::ConstShared
   detect_color_= get_parameter("detect_color").as_int();
   //Get the transform from odom_aim to gimbal
   try {
+    // ? 可能是tf的数据传输，或延迟导致detector节点无法查询到变换
     rclcpp::Time target_time = img_msg->header.stamp;
     //std::cout<<odom_frame_<<std::endl;
     auto odom_to_gimbal = tf2_buffer_->lookupTransform(

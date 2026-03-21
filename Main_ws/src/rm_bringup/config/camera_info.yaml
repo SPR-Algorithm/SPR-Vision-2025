@@ -1,19 +1,44 @@
-#全向轮
-
-image_width: 1280
-image_height: 1024
+# image_width: 1440
+# image_height: 1080
+# camera_name: narrow_stereo
+# camera_matrix:
+#   rows: 3
+#   cols: 3
+#   data: [2336.69829,    0.     ,  708.52593,
+#             0.     , 2342.80034,  546.97835,
+#             0.     ,    0.     ,    1.     ]
+# distortion_model: plumb_bob
+# distortion_coefficients:
+#   rows: 1
+#   cols: 5
+#   data: [-0.073231, 0.225358, -0.001236, -0.000111, 0.000000]
+# rectification_matrix:
+#   rows: 3
+#   cols: 3
+#   data: [1., 0., 0.,
+#          0., 1., 0.,
+#          0., 0., 1.]
+# projection_matrix:
+#   rows: 3
+#   cols: 4
+#   data: [2323.60913,    0.     ,  707.89502,    0.     ,
+#             0.     , 2333.01514,  546.0421 ,    0.     ,
+#             0.     ,    0.     ,    1.     ,    0.     ]
+# hik_camera 8mm
+image_width: 1440
+image_height: 1080
 camera_name: narrow_stereo
 camera_matrix:
   rows: 3
   cols: 3
-  data: [2009.95354,    0.     ,  661.80486,
-            0.     , 2015.28995,  541.61636,
+  data: [1803.85723,    0.     ,  698.29467,
+            0.     , 1800.27952,  579.92966,
             0.     ,    0.     ,    1.     ]
 distortion_model: plumb_bob
 distortion_coefficients:
   rows: 1
   cols: 5
-  data: [-0.086832, 0.404938, 0.001267, 0.001916, 0.000000]
+  data: [-0.086982, 0.202748, -0.000254, 0.000123, 0.000000]
 rectification_matrix:
   rows: 3
   cols: 3
@@ -23,9 +48,10 @@ rectification_matrix:
 projection_matrix:
   rows: 3
   cols: 4
-  data: [2002.29504,    0.     ,  662.4823 ,    0.     ,
-            0.     , 2008.44922,  541.65599,    0.     ,
+  data: [1787.40894,    0.     ,  697.99599,    0.     ,
+            0.     , 1787.37134,  579.63274,    0.     ,
             0.     ,    0.     ,    1.     ,    0.     ]
+
 
 # #舵轮
 # image_width: 1280
